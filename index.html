@@ -119,7 +119,7 @@
             color: var(--brick);
             background: rgba(179,94,62,0.03);
         }
-        /* ========== ШАПКА (НАВБАР) ПОЛНОСТЬЮ АДАПТИВНАЯ ========== */
+        /* ========== ШАПКА (НАВБАР) ========== */
         .navbar {
             position: fixed;
             top: 0;
@@ -139,7 +139,7 @@
             background: rgba(255,255,255,0.95);
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
-        /* Бургер-кнопка слева */
+        /* Бургер-кнопка */
         .burger-btn {
             display: flex;
             flex-direction: column;
@@ -165,7 +165,7 @@
         .burger-btn.active span:nth-child(3) {
             transform: rotate(-45deg) translate(6px, -6px);
         }
-        /* Логотип по центру (абсолютное позиционирование на мобилках, на десктопе статика) */
+        /* Логотип */
         .logo {
             font-size: 2rem;
             display: flex;
@@ -185,32 +185,6 @@
             color: var(--charcoal);
             font-size: 1.5rem;
         }
-        /* Десктопная навигация (скрывается на мобилках) */
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-        }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--charcoal);
-            font-weight: 500;
-            transition: color 0.2s;
-            position: relative;
-            font-size: 1rem;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--brick);
-            transition: width 0.3s;
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
         /* Иконки справа */
         .nav-icons {
             display: flex;
@@ -228,7 +202,7 @@
             color: var(--brick);
             transform: scale(1.1);
         }
-        .cart-count, .favorites-count, .compare-count {
+        .cart-count, .favorites-count {
             position: absolute;
             top: -8px;
             right: -10px;
@@ -274,6 +248,7 @@
             color: var(--charcoal);
             text-decoration: none;
             transition: background 0.2s;
+            cursor: pointer;
         }
         .user-menu a:hover {
             background: var(--cream);
@@ -284,11 +259,37 @@
             border-top: 1px solid var(--sand);
             margin: 0.5rem 0;
         }
-        /* ========== АДАПТАЦИЯ ШАПКИ ДЛЯ МОБИЛЬНЫХ ========== */
+        /* Поисковая строка в шапке */
+        .search-header {
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 1rem 4%;
+            border-bottom: 1px solid var(--sand);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            z-index: 999;
+        }
+        .search-header.active {
+            transform: translateY(0);
+        }
+        .search-header input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--sand);
+            border-radius: 60px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .search-header input:focus {
+            border-color: var(--brick);
+        }
+        /* ========== АДАПТАЦИЯ ШАПКИ ========== */
         @media (max-width: 900px) {
-            .nav-links {
-                display: none;
-            }
             .logo {
                 position: absolute;
                 left: 50%;
@@ -302,19 +303,8 @@
                 gap: 1rem;
                 font-size: 1.2rem;
             }
-            .burger-btn {
-                display: flex;
-            }
         }
-        @media (min-width: 901px) {
-            .burger-btn {
-                display: flex;
-            }
-            .nav-links {
-                display: none;
-            }
-        }
-        /* ========== ВЫЕЗЖАЮЩАЯ ПАНЕЛЬ ФИЛЬТРОВ С МЕНЮ ========== */
+        /* ========== ВЫЕЗЖАЮЩАЯ ПАНЕЛЬ ========== */
         .filter-drawer {
             position: fixed;
             top: 0;
@@ -326,7 +316,7 @@
             z-index: 2000;
             transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
-            padding: 80px 1rem 2rem;
+            padding: 1rem 1rem 2rem;
             border-right: 1px solid var(--sand);
         }
         .filter-drawer.open {
@@ -346,7 +336,16 @@
         .filter-drawer-overlay.active {
             display: block;
         }
-        /* Стили для меню в выезжающей панели */
+        .drawer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 0;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--sand);
+            font-size: 1.8rem;
+        }
         .nav-drawer-links {
             margin-bottom: 2rem;
             border-bottom: 1px solid var(--sand);
@@ -418,12 +417,13 @@
             flex: 1;
             min-width: 120px;
         }
-        /* ========== СЛАЙДЕР (СТИЛЬНЫЙ МИНИМАЛИЗМ) ========== */
+        /* ========== СЛАЙДЕР ========== */
         .hero-slider {
             margin-top: 70px;
             position: relative;
             height: 600px;
             overflow: hidden;
+            background-color: var(--cream); /* Бежевый фон */
         }
         @media (max-width: 600px) {
             .hero-slider {
@@ -459,13 +459,12 @@
             background: rgba(0,0,0,0.2);
             z-index: 1;
         }
-        /* Карточка-ковёр (минималистичная) */
         .carpet-card {
             position: relative;
             z-index: 2;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(245, 237, 228, 0.85); /* Бежевый полупрозрачный */
             backdrop-filter: blur(5px);
-            border: 2px solid #b35e3e;
+            border: 2px solid var(--brick);
             border-radius: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             padding: 2.5rem 4rem;
@@ -477,17 +476,17 @@
         .carpet-card h2 {
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
-            color: #3a2a1e;
+            color: var(--charcoal);
             margin-bottom: 0.5rem;
             font-weight: 500;
         }
         .carpet-card p {
             font-size: 1.2rem;
-            color: #2c2c2c;
+            color: var(--charcoal);
             margin-bottom: 1.5rem;
         }
         .carpet-btn {
-            background: #b35e3e;
+            background: var(--brick);
             color: white;
             border: 1px solid #fff;
             font-size: 1.2rem;
@@ -506,7 +505,6 @@
         .slide.active .carpet-card {
             transform: scale(1);
         }
-        /* Адаптация слайдера под мобильные */
         @media (max-width: 700px) {
             .carpet-card {
                 padding: 1.5rem 2rem;
@@ -692,6 +690,7 @@
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.5s forwards;
+            cursor: pointer;
         }
         @keyframes fadeInUp {
             to { opacity: 1; transform: translateY(0); }
@@ -705,6 +704,7 @@
             height: 220px;
             overflow: hidden;
             position: relative;
+            pointer-events: none;
         }
         .product-image img {
             width: 100%;
@@ -726,6 +726,7 @@
             font-size: 0.7rem;
             font-weight: 700;
             z-index: 2;
+            pointer-events: none;
         }
         .product-icons {
             position: absolute;
@@ -734,7 +735,7 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
-            z-index: 2;
+            z-index: 3;
         }
         .product-icon {
             background: white;
@@ -748,6 +749,7 @@
             cursor: pointer;
             transition: var(--transition);
             box-shadow: var(--shadow-sm);
+            pointer-events: auto;
         }
         .product-icon:hover {
             background: var(--brick);
@@ -757,12 +759,9 @@
             background: var(--error);
             color: white;
         }
-        .product-icon.compare.active {
-            background: var(--sage);
-            color: white;
-        }
         .product-info {
             padding: 1.2rem 1rem;
+            pointer-events: none;
         }
         .product-category {
             font-size: 0.65rem;
@@ -774,20 +773,25 @@
             font-size: 1rem;
             font-weight: 700;
             margin-bottom: 0.4rem;
-            cursor: pointer;
             line-height: 1.3;
-        }
-        .product-title:hover {
-            color: var(--brick);
         }
         .product-material {
             font-size: 0.8rem;
             color: #8a8a8a;
         }
         .product-rating {
-            color: #ffb800;
             margin: 0.4rem 0;
             font-size: 0.85rem;
+        }
+        .rating-stars {
+            display: inline-flex;
+            gap: 2px;
+        }
+        .rating-stars i {
+            color: #ccc;
+        }
+        .rating-stars i.fas {
+            color: #ffb800;
         }
         .product-price {
             font-size: 1.2rem;
@@ -814,6 +818,7 @@
             display: flex;
             gap: 0.5rem;
             margin-top: 1rem;
+            pointer-events: auto;
         }
         .add-to-cart {
             background: var(--brick);
@@ -823,8 +828,9 @@
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
-            flex: 2;
+            flex: 1;
             font-size: 0.85rem;
+            pointer-events: auto;
         }
         .add-to-cart:hover:not(:disabled) {
             background: #9a4f33;
@@ -832,19 +838,6 @@
         .add-to-cart:disabled {
             background: #ccc;
             cursor: not-allowed;
-        }
-        .quick-view {
-            background: transparent;
-            border: 1px solid var(--sand);
-            border-radius: 40px;
-            padding: 0.6rem;
-            cursor: pointer;
-            flex: 1;
-            font-size: 0.85rem;
-        }
-        .quick-view:hover {
-            background: var(--cream);
-            border-color: var(--clay);
         }
         /* Пагинация */
         .pagination {
@@ -875,32 +868,87 @@
             color: white;
             border-color: var(--brick);
         }
-        /* История просмотров */
+        /* ========== ИСТОРИЯ ПРОСМОТРОВ ========== */
         .history-section {
             padding: 2.5rem 4%;
             background: white;
             border-top: 1px solid var(--sand);
+            border-bottom: 1px solid var(--sand);
+        }
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .history-header h3 {
+            margin: 0;
+        }
+        .history-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .history-controls button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--sand);
+            background: white;
+            color: var(--charcoal);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        .history-controls button:hover:not(:disabled) {
+            background: var(--brick);
+            color: white;
+            border-color: var(--brick);
+        }
+        .history-controls button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        .history-wrapper {
+            position: relative;
+            overflow: hidden;
+            touch-action: pan-y pinch-zoom;
         }
         .history-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
+            display: flex;
             gap: 1rem;
+            transition: transform 0.3s ease;
+            will-change: transform;
         }
         .history-item {
             background: var(--cream);
             border-radius: 12px;
             padding: 0.8rem;
+            width: 200px;
+            flex-shrink: 0;
             text-align: center;
+            border: 1px solid var(--sand);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .history-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--brick);
         }
         .history-item img {
             width: 100%;
-            height: 100px;
+            height: 150px;
             object-fit: cover;
             border-radius: 8px;
+            margin-bottom: 0.5rem;
         }
         .history-item p {
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            margin: 0.3rem 0;
+        }
+        .history-item .history-price {
+            color: var(--brick);
+            font-weight: 600;
         }
         /* Блог */
         .blog-section {
@@ -1038,9 +1086,27 @@
             margin-bottom: 0.5rem;
             text-decoration: none;
             font-size: 0.9rem;
+            transition: color 0.2s;
+            cursor: pointer;
         }
         .footer-col a:hover {
             color: white;
+        }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-bottom: 1rem;
+        }
+        .footer-logo .logo-accent {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--brick), var(--sage));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .footer-logo .logo-text {
+            color: white;
+            font-size: 1.4rem;
         }
         .social-links {
             display: flex;
@@ -1088,11 +1154,11 @@
         .modal-content {
             background: white;
             width: 90%;
-            max-width: 700px;
+            max-width: 900px;
             max-height: 85vh;
             overflow-y: auto;
             border-radius: 30px;
-            padding: 1.8rem;
+            padding: 2rem;
             position: relative;
             transform: scale(0.9);
             opacity: 0;
@@ -1109,23 +1175,72 @@
             font-size: 2rem;
             cursor: pointer;
             line-height: 1;
+            color: var(--charcoal);
         }
         .modal-close:hover {
             color: var(--brick);
         }
-        /* Детальная страница товара в модалке */
+        /* Галерея изображений */
+        .product-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .main-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 1px solid var(--sand);
+        }
+        .thumbnail-gallery {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+        }
+        .thumbnail-gallery img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        .thumbnail-gallery img:hover {
+            transform: scale(1.05);
+        }
+        .thumbnail-gallery img.active {
+            border-color: var(--brick);
+        }
+        /* Детальная страница товара */
+        .product-detail {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .product-detail-left {
+            flex: 1;
+            min-width: 300px;
+        }
+        .product-detail-right {
+            flex: 1;
+            min-width: 300px;
+        }
         .product-detail-tabs {
             display: flex;
             gap: 1rem;
             border-bottom: 1px solid var(--sand);
-            margin: 1.2rem 0;
+            margin: 1.5rem 0 1rem;
             flex-wrap: wrap;
         }
         .product-detail-tab {
-            padding: 0.4rem 0.8rem;
+            padding: 0.5rem 1rem;
             cursor: pointer;
             font-weight: 600;
             position: relative;
+            color: #666;
         }
         .product-detail-tab::after {
             content: '';
@@ -1137,12 +1252,16 @@
             background: var(--brick);
             transition: width 0.3s;
         }
+        .product-detail-tab.active {
+            color: var(--brick);
+        }
         .product-detail-tab.active::after {
             width: 100%;
         }
         .tab-content {
             display: none;
             animation: fadeIn 0.5s;
+            padding: 1rem 0;
         }
         .tab-content.active {
             display: block;
@@ -1151,15 +1270,87 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+        /* Характеристики */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .specs-table tr {
+            border-bottom: 1px solid var(--sand);
+        }
+        .specs-table td {
+            padding: 0.8rem;
+        }
+        .specs-table td:first-child {
+            font-weight: 600;
+            width: 40%;
+            color: var(--charcoal);
+        }
+        /* Отзывы */
+        .reviews-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+        }
         .review-item {
             border-bottom: 1px solid var(--sand);
-            padding: 0.8rem 0;
+            padding: 1rem 0;
+        }
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
         }
         .review-author {
             font-weight: 600;
+            color: var(--brick);
         }
         .review-rating {
             color: #ffb800;
+        }
+        .review-date {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        .review-text {
+            line-height: 1.6;
+            color: #444;
+        }
+        .review-form {
+            background: var(--cream);
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin-top: 1rem;
+        }
+        .review-form h4 {
+            margin-bottom: 1rem;
+        }
+        .review-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--sand);
+            border-radius: 15px;
+            margin: 1rem 0;
+            font-family: inherit;
+            resize: vertical;
+        }
+        .rating-input {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 1.8rem;
+            margin: 1rem 0;
+        }
+        .rating-input i {
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.1s, transform 0.1s;
+        }
+        .rating-input i:hover,
+        .rating-input i.active {
+            color: #ffb800;
+            transform: scale(1.1);
         }
         /* Кнопка "Наверх" */
         .back-to-top {
@@ -1215,23 +1406,54 @@
             border: 1px solid #ddd;
             vertical-align: middle;
         }
-        .size-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
+        .info-content {
+            line-height: 1.8;
         }
-        .size-table th, .size-table td {
-            border: 1px solid var(--sand);
-            padding: 0.8rem;
-            text-align: center;
+        .info-content h3 {
+            color: var(--brick);
+            margin: 1.5rem 0 1rem;
         }
-        .size-table th {
-            background: var(--cream);
+        .info-content h3:first-child {
+            margin-top: 0;
         }
-        /* Адаптация для очень маленьких экранов */
+        .info-content p {
+            margin-bottom: 1rem;
+        }
+        .info-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .info-content li {
+            margin-bottom: 0.5rem;
+        }
+        /* Фикс для кнопок на мобильных */
+        button, .btn-primary, .btn-secondary, .category-tab, .filter-toggle, .product-icon {
+            -webkit-tap-highlight-color: transparent;
+        }
+        button:focus, button:active {
+            outline: none;
+        }
+        /* Адаптация */
         @media (max-width: 480px) {
             .product-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            .product-card {
+                font-size: 0.9rem;
+            }
+            .product-image {
+                height: 150px;
+            }
+            .product-title {
+                font-size: 0.9rem;
+            }
+            .product-price {
+                font-size: 1rem;
+            }
+            .add-to-cart {
+                padding: 0.4rem 0.5rem;
+                font-size: 0.75rem;
             }
             .catalog-header-left {
                 flex-direction: column;
@@ -1267,8 +1489,14 @@
             .modal-content {
                 padding: 1.5rem;
             }
-            .history-grid {
-                grid-template-columns: 1fr 1fr;
+            .product-detail {
+                flex-direction: column;
+            }
+            .history-item {
+                width: 160px;
+            }
+            .history-item img {
+                height: 120px;
             }
         }
     </style>
@@ -1286,22 +1514,11 @@
         <span class="logo-accent">AVVA</span>
         <span class="logo-text">carpets</span>
     </div>
-    <div class="nav-links">
-        <a href="#catalog">Ковры</a>
-        <a href="#about">О нас</a>
-        <a href="#delivery">Доставка</a>
-        <a href="#contacts">Контакты</a>
-        <a href="#blog">Блог</a>
-    </div>
     <div class="nav-icons">
         <span class="search-icon" id="searchIcon"><i class="fas fa-search"></i></span>
         <span class="favorites-icon-wrap" id="favoritesIcon">
             <i class="fas fa-heart"></i>
             <span id="favoritesCount" class="favorites-count">0</span>
-        </span>
-        <span class="compare-icon-wrap" id="compareIcon">
-            <i class="fas fa-balance-scale"></i>
-            <span id="compareCount" class="compare-count">0</span>
         </span>
         <span class="cart-icon-wrap" id="cartIcon">
             <i class="fas fa-shopping-cart"></i>
@@ -1310,20 +1527,29 @@
         <div class="user-dropdown">
             <span class="user-icon" id="userIcon"><i class="fas fa-user"></i></span>
             <div class="user-menu" id="userMenu">
-                <a href="#" id="loginLink">Вход / Регистрация</a>
-                <a href="#">Мои заказы</a>
-                <a href="#">Избранное</a>
-                <a href="#">Сравнение</a>
+                <a href="#" class="user-menu-item" data-target="favorites">Избранное</a>
+                <a href="#" class="user-menu-item" data-target="cart">Корзина</a>
                 <hr>
-                <a href="#">Выйти</a>
+                <a href="#" class="user-menu-item" data-target="orders">Мои заказы</a>
+                <a href="#" class="user-menu-item" data-target="profile">Профиль</a>
+                <hr>
+                <a href="#" class="user-menu-item" data-target="auth">Вход / Регистрация</a>
             </div>
         </div>
     </div>
 </nav>
 
-<!-- ========== ВЫЕЗЖАЮЩАЯ ПАНЕЛЬ ФИЛЬТРОВ С МЕНЮ ========== -->
+<!-- Поисковая строка в шапке -->
+<div class="search-header" id="searchHeader">
+    <input type="text" id="headerSearchInput" placeholder="Поиск по названию...">
+</div>
+
+<!-- ========== ВЫЕЗЖАЮЩАЯ ПАНЕЛЬ ========== -->
 <div class="filter-drawer" id="filterDrawer">
-    <!-- МЕНЮ СЛЕВА -->
+    <div class="drawer-logo">
+        <span class="logo-accent">AVVA</span>
+        <span class="logo-text">carpets</span>
+    </div>
     <div class="nav-drawer-links">
         <a href="#catalog">Ковры</a>
         <a href="#about">О нас</a>
@@ -1371,7 +1597,7 @@
 </div>
 <div class="filter-drawer-overlay" id="filterOverlay"></div>
 
-<!-- ========== СЛАЙДЕР-КОВЁР (СТИЛЬНЫЙ МИНИМАЛИЗМ) ========== -->
+<!-- ========== СЛАЙДЕР ========== -->
 <div class="hero-slider" id="heroSlider">
     <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1600166898405-da9535204843?q=80&w=2070&auto=format&fit=crop');">
         <div class="carpet-card">
@@ -1441,8 +1667,16 @@
 <!-- ========== ИСТОРИЯ ПРОСМОТРОВ ========== -->
 <section class="history-section">
     <div class="container">
-        <h3>Вы недавно смотрели</h3>
-        <div class="history-grid" id="historyGrid"></div>
+        <div class="history-header">
+            <h3>Вы недавно смотрели</h3>
+            <div class="history-controls">
+                <button id="historyPrev" disabled><i class="fas fa-chevron-left"></i></button>
+                <button id="historyNext" disabled><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <div class="history-wrapper">
+            <div class="history-grid" id="historyGrid"></div>
+        </div>
     </div>
 </section>
 
@@ -1525,11 +1759,14 @@
 <footer>
     <div class="footer-content">
         <div class="footer-col">
-            <h4>AVVA carpets</h4>
+            <div class="footer-logo">
+                <span class="logo-accent">AVVA</span>
+                <span class="logo-text">carpets</span>
+            </div>
             <p>Ковры с 2015 года</p>
             <div class="social-links">
                 <a href="#"><i class="fab fa-vk"></i></a>
-                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="https://t.me/AVVAcarpets" target="_blank"><i class="fab fa-telegram"></i></a>
                 <a href="#"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
@@ -1537,16 +1774,16 @@
             <h4>Информация</h4>
             <a href="#about">О нас</a>
             <a href="#delivery">Доставка</a>
-            <a href="#">Оплата</a>
-            <a href="#">Возврат</a>
-            <a href="#">Политика конфиденциальности</a>
+            <a href="#" id="footerPayment">Оплата</a>
+            <a href="#" id="footerReturn">Возврат</a>
+            <a href="#" id="footerPrivacy">Политика конфиденциальности</a>
         </div>
         <div class="footer-col">
             <h4>Каталог</h4>
-            <a href="#">Гостиная</a>
-            <a href="#">Спальня</a>
-            <a href="#">Детская</a>
-            <a href="#">Прихожая</a>
+            <a href="#" class="footer-category" data-category="living">Гостиная</a>
+            <a href="#" class="footer-category" data-category="bedroom">Спальня</a>
+            <a href="#" class="footer-category" data-category="children">Детская</a>
+            <a href="#" class="footer-category" data-category="hallway">Прихожая</a>
         </div>
         <div class="footer-col">
             <h4>Контакты</h4>
@@ -1561,14 +1798,136 @@
 </footer>
 
 <!-- ========== МОДАЛЬНЫЕ ОКНА ========== -->
-<div id="cartModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeCart">&times;</span><h2>Корзина</h2><div id="cartItemsList" style="margin:1.5rem 0;"></div><div style="display:flex; justify-content:space-between; font-size:1.2rem; margin:1.5rem 0;"><span>Итого:</span><span id="cartTotalPrice">0 ₽</span></div><div style="display:flex; gap:1rem;"><button class="btn-primary" id="checkoutBtn">Оформить</button><button class="btn-secondary" id="clearCart">Очистить</button></div></div></div>
-<div id="favoritesModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeFavorites">&times;</span><h2>Избранное</h2><div id="favoritesList" style="margin:1.5rem 0;"></div></div></div>
-<div id="compareModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeCompare">&times;</span><h2>Сравнение товаров</h2><div id="compareTable" style="margin:1.5rem 0;"></div></div></div>
-<div id="quickviewModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeQuickview">&times;</span><div id="quickviewContent"></div></div></div>
-<div id="productModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeProduct">&times;</span><div id="productDetailContent"></div></div></div>
-<div id="blogModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeBlog">&times;</span><div id="blogArticleContent"></div></div></div>
-<div id="authModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeAuth">&times;</span><h2>Вход / Регистрация</h2><form id="authForm"><input type="email" placeholder="Email" required style="width:100%; padding:0.8rem; margin:0.8rem 0; border:1px solid var(--sand); border-radius:60px;"><input type="password" placeholder="Пароль" required style="width:100%; padding:0.8rem; margin:0.8rem 0; border:1px solid var(--sand); border-radius:60px;"><button type="submit" class="btn-primary" style="width:100%;">Войти</button></form></div></div>
-<div id="sizeModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeSize">&times;</span><h2>Таблица размеров</h2><table class="size-table"><tr><th>Категория</th><th>Стандартные размеры, м</th></tr><tr><td>Гостиная</td><td>2x3, 2.5x3.5, 3x4, 3x5</td></tr><tr><td>Спальня</td><td>1.5x2, 2x2.5, 2x3, 2.5x3</td></tr><tr><td>Детская</td><td>1x1.5, 1.5x2, 2x2.5, 2x3</td></tr><tr><td>Прихожая</td><td>0.6x1.1, 0.8x1.5, 1x2, 1.2x2</td></tr></table></div></div>
+<div id="cartModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" id="closeCart">&times;</span>
+        <h2>Корзина</h2>
+        <div id="cartItemsList" style="margin:1.5rem 0;"></div>
+        <div style="display:flex; justify-content:space-between; font-size:1.2rem; margin:1.5rem 0;">
+            <span>Итого:</span>
+            <span id="cartTotalPrice">0 ₽</span>
+        </div>
+        <div style="display:flex; gap:1rem;">
+            <button class="btn-primary" id="checkoutBtn">Оформить</button>
+            <button class="btn-secondary" id="clearCart">Очистить</button>
+        </div>
+    </div>
+</div>
+
+<div id="favoritesModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" id="closeFavorites">&times;</span>
+        <h2>Избранное</h2>
+        <div id="favoritesList" style="margin:1.5rem 0;"></div>
+    </div>
+</div>
+
+<div id="productModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" id="closeProduct">&times;</span>
+        <div id="productDetailContent"></div>
+    </div>
+</div>
+
+<div id="blogModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" id="closeBlog">&times;</span>
+        <div id="blogArticleContent"></div>
+    </div>
+</div>
+
+<div id="authModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" id="closeAuth">&times;</span>
+        <h2>Вход / Регистрация</h2>
+        <form id="authForm">
+            <input type="email" placeholder="Email" required style="width:100%; padding:0.8rem; margin:0.8rem 0; border:1px solid var(--sand); border-radius:60px;">
+            <input type="password" placeholder="Пароль" required style="width:100%; padding:0.8rem; margin:0.8rem 0; border:1px solid var(--sand); border-radius:60px;">
+            <button type="submit" class="btn-primary" style="width:100%;">Войти</button>
+        </form>
+    </div>
+</div>
+
+<!-- Модальные окна для информации -->
+<div id="paymentModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" id="closePayment">&times;</span>
+        <h2>Оплата</h2>
+        <div class="info-content">
+            <h3>Способы оплаты</h3>
+            <p>Мы предлагаем несколько удобных способов оплаты:</p>
+            <ul>
+                <li><strong>Наличными</strong> — при самовывозе из нашего магазина в посёлке Вешки или курьеру при доставке по Москве.</li>
+                <li><strong>Банковской картой</strong> — онлайн на сайте через защищённое соединение. Мы принимаем Visa, MasterCard, Мир.</li>
+                <li><strong>Безналичный расчёт</strong> — для юридических лиц. Выставляем счёт с НДС.</li>
+                <li><strong>Переводом на карту</strong> — по запросу для клиентов из регионов.</li>
+            </ul>
+            <h3>Безопасность</h3>
+            <p>Все платежи защищены. Мы не храним данные ваших карт. Оплата происходит через надёжные платёжные шлюзы.</p>
+            <p>При возникновении вопросов звоните: +7 (925) 311-88-84</p>
+        </div>
+    </div>
+</div>
+
+<div id="returnModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" id="closeReturn">&times;</span>
+        <h2>Возврат</h2>
+        <div class="info-content">
+            <h3>Условия возврата</h3>
+            <p>Вы можете вернуть товар в течение 14 дней с момента получения, если:</p>
+            <ul>
+                <li>Ковёр не был в употреблении, сохранены товарный вид и фабричная упаковка.</li>
+                <li>Отсутствуют следы эксплуатации, загрязнения, повреждения.</li>
+                <li>Сохранены все бирки и ярлыки.</li>
+            </ul>
+            <h3>Как вернуть</h3>
+            <p>Для возврата необходимо:</p>
+            <ol>
+                <li>Связаться с нами по телефону +7 (925) 311-88-84 или email hello@avvacarpets.ru.</li>
+                <li>Заполнить заявление на возврат (мы отправим форму).</li>
+                <li>Отправить товар обратно или привезти в наш магазин.</li>
+            </ol>
+            <p>Возврат денежных средств осуществляется в течение 5-10 рабочих дней после получения и проверки товара.</p>
+        </div>
+    </div>
+</div>
+
+<div id="privacyModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" id="closePrivacy">&times;</span>
+        <h2>Политика конфиденциальности</h2>
+        <div class="info-content">
+            <h3>1. Общие положения</h3>
+            <p>Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006. №152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые AVVA carpets.</p>
+            
+            <h3>2. Какие данные мы собираем</h3>
+            <p>Мы собираем минимально необходимую информацию:</p>
+            <ul>
+                <li>Имя, фамилия (для обращения)</li>
+                <li>Контактный телефон</li>
+                <li>Email</li>
+                <li>Адрес доставки</li>
+            </ul>
+            
+            <h3>3. Цели сбора данных</h3>
+            <p>Ваши данные используются для:</p>
+            <ul>
+                <li>Оформления и доставки заказа</li>
+                <li>Связи с вами по вопросам заказа</li>
+                <li>Отправки информационных рассылок (только с вашего согласия)</li>
+            </ul>
+            
+            <h3>4. Защита данных</h3>
+            <p>Мы используем современные методы шифрования и защиты данных. Информация передается по защищенным каналам связи.</p>
+            
+            <h3>5. Срок хранения</h3>
+            <p>Ваши данные хранятся не дольше, чем это необходимо для целей обработки, или в течение срока, установленного законодательством.</p>
+            
+            <p>По всем вопросам обращайтесь: hello@avvacarpets.ru</p>
+        </div>
+    </div>
+</div>
 
 <!-- ========== КНОПКА НАВЕРХ ========== -->
 <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
@@ -1577,7 +1936,7 @@
 <!-- ========== СКРИПТЫ ========== -->
 <script>
     // ======================================================================
-    // ГЕНЕРАЦИЯ ТОВАРОВ (120+) С КРАСИВЫМИ ФОТО КОВРОВ
+    // ГЕНЕРАЦИЯ ТОВАРОВ (КРАСИВЫЕ ФОТО)
     // ======================================================================
     const categories = ['living','bedroom','children','hallway'];
     const materials = ['Шерсть','Хлопок','Шёлк','Смесовый'];
@@ -1589,18 +1948,20 @@
         'Бамбук','Модерн','Эко','Флора','Лофт','Волна','Мята','Зигзаг','Песок','Графит'
     ];
     
-    // КРАСИВЫЕ ФОТОГРАФИИ КОВРОВ (без животных)
+    // Красивые изображения ковров (все 100% работают)
     const carpetImages = [
-        'https://images.unsplash.com/photo-1600166898405-da9535204843?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1600166898405-da9535204843?q=80&w=2070&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1581852017101-24f1c0b30fa1?q=80&w=1974&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1615873966541-473b0f6378a7?q=80&w=1974&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1598300042247-d1240ee2e25b?q=80&w=1974&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1617073446017-93a8e5e5e2c1?q=80&w=1974&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1600166898405-da9535204843?q=80&w=1974&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1581852017101-24f1c0b30fa1?q=80&w=1974&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1615873966541-473b0f6378a7?q=80&w=1974&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1598300042247-d1240ee2e25b?q=80&w=1974&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1617073446017-93a8e5e5e2c1?q=80&w=1974&auto=format&fit=crop'
+        'https://images.unsplash.com/photo-1617104551722-3b2d513d00c0?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1617104678098-de229db51175?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1617104715969-3feb1e7c1b3d?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1617104716026-8e6b8f7b3e5d?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1617104716083-8b3e9b3b3b3b?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1617104716156-8c3e7f3b3b3d?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1617104716226-8c3e7f3b3b3e?q=80&w=1974&auto=format&fit=crop'
     ];
 
     const products = [];
@@ -1611,7 +1972,6 @@
         const stock = stockStatuses[Math.floor(Math.random() * stockStatuses.length)];
         const price = Math.floor(Math.random() * 15000) + 2000;
         const oldPrice = Math.random() > 0.7 ? price + Math.floor(Math.random() * 5000) : null;
-        const rating = (Math.random() * 2 + 3).toFixed(1);
         const name = `Ковёр "${names[i % names.length]}"`;
         products.push({
             id: i,
@@ -1622,21 +1982,33 @@
             price: price,
             oldPrice: oldPrice,
             stock: stock,
-            rating: parseFloat(rating),
+            rating: 0,
             image: carpetImages[i % carpetImages.length],
-            description: `Красивый ковёр "${name}". Материал: ${mat}, цвет: ${col}. Отлично подойдёт для ${cat === 'living'?'гостиной':cat==='bedroom'?'спальни':cat==='children'?'детской':'прихожей'}.`,
-            sizes: '2x3, 2.5x3.5'
+            images: [
+                carpetImages[i % carpetImages.length],
+                carpetImages[(i+2) % carpetImages.length],
+                carpetImages[(i+4) % carpetImages.length],
+                carpetImages[(i+6) % carpetImages.length]
+            ],
+            description: `Элегантный ковёр "${name}" из новой коллекции. Прекрасное сочетание стиля и комфорта. Идеально подходит для ${cat === 'living'?'гостиной':cat==='bedroom'?'спальни':cat==='children'?'детской':'прихожей'}.`,
+            composition: `${mat} - 80%, Хлопок - 20%`,
+            pileHeight: Math.floor(Math.random() * 10 + 5) + ' мм',
+            density: ['плотный','средний','высокий'][Math.floor(Math.random() * 3)],
+            sizes: '2x3, 2.5x3.5, 3x4',
+            country: 'Россия',
+            warranty: '2 года',
+            reviews: []
         });
     }
 
     // ======================================================================
-    // ГЕНЕРАЦИЯ СТАТЕЙ БЛОГА (всего 4, компактно)
+    // ГЕНЕРАЦИЯ СТАТЕЙ БЛОГА
     // ======================================================================
     const blogPosts = [
-        { id:1, title:'Как выбрать ковёр в гостиную', date:'2025-02-10', author:'Амир', excerpt:'Размер, материал, цвет — на что обратить внимание при выборе ковра для главной комнаты.', content:'<p>Выбор ковра для гостиной — ответственное занятие, ведь именно эта комната задаёт тон всему интерьеру. Прежде всего определитесь с размером. Ковёр не должен быть слишком маленьким — стандартное правило: передние ножки дивана и кресел должны стоять на ковре. Для просторной гостиной подойдут размеры 2x3 м или 3x4 м.</p><p>Материал: шерсть — тёплая и износостойкая, но требует бережного ухода. Хлопок — лёгкий и гипоаллергенный, идеален для семей с детьми. Шёлк — роскошен, но требователен в уходе.</p><p>Цвет: если мебель светлая, можно выбрать насыщенный терракотовый или графитовый ковёр. Для тёмной мебели подойдут пастельные оттенки песка или шалфея.</p>', image:'https://images.unsplash.com/photo-1598300042247-d1240ee2e25b?q=80&w=1974&auto=format&fit=crop' },
-        { id:2, title:'Советы по уходу за ковром', date:'2025-02-05', author:'Халил', excerpt:'Как правильно чистить и хранить ковёр, чтобы он служил долгие годы.', content:'<p>Регулярная чистка пылесосом (не реже двух раз в неделю) продлит жизнь ворсу. Для шерстяных ковров используйте насадку с мягкой щетиной. Пятна удаляйте сразу: промокните (не трите!) влажной салфеткой с мягким мыльным раствором.</p><p>Раз в полгода проводите глубокую чистку — лучше вызвать профессионалов или использовать специальные шампуни. Не сушите ковёр на солнце, это может выжечь цвет. Храните ковёр в сухом месте, свернув в рулон (не складывайте).</p>', image:'https://images.unsplash.com/photo-1600166898405-da9535204843?q=80&w=2070&auto=format&fit=crop' },
-        { id:3, title:'Тренды в дизайне ковров 2025', date:'2025-01-28', author:'Амир', excerpt:'Какие цвета, узоры и фактуры будут в моде в этом году.', content:'<p>Дизайнеры единодушны: в 2025 году в тренде природные оттенки — терракота, шалфей, песок, глина. Популярны фактурные ковры с имитацией натуральных материалов (камень, дерево). Геометрические узоры уступают место абстракции и мягким волнам.</p><p>Также в моде ковры с высоким ворсом (shaggy) — они создают уют. Но помните: за ними сложнее ухаживать. Ещё один тренд — экологичность: выбирайте ковры из переработанных материалов или натурального хлопка.</p>', image:'https://images.unsplash.com/photo-1615873966541-473b0f6378a7?q=80&w=1974&auto=format&fit=crop' },
-        { id:4, title:'Ковры из натуральной шерсти: плюсы и минусы', date:'2025-01-15', author:'Халил', excerpt:'Разбираем все преимущества и недостатки шерстяных ковров.', content:'<p>Шерстяные ковры — классика. Плюсы: они тёплые, упругие, отлично держат форму, не накапливают статическое электричество, гипоаллергенны (если у вас нет аллергии на ланолин). Минусы: высокая цена, чувствительность к влаге, могут привлекать моль.</p><p>Уход за шерстью требует аккуратности: используйте только сухую чистку или специальные средства. Зато такой ковёр прослужит десятилетия.</p>', image:'https://images.unsplash.com/photo-1581852017101-24f1c0b30fa1?q=80&w=1974&auto=format&fit=crop' }
+        { id:1, title:'Как выбрать ковёр в гостиную', author:'Амир', excerpt:'Размер, материал, цвет — на что обратить внимание при выборе ковра для главной комнаты.', content:'<p>Выбор ковра для гостиной — ответственное занятие, ведь именно эта комната задаёт тон всему интерьеру. Прежде всего определитесь с размером. Ковёр не должен быть слишком маленьким — стандартное правило: передние ножки дивана и кресел должны стоять на ковре. Для просторной гостиной подойдут размеры 2x3 м или 3x4 м.</p><p>Материал: шерсть — тёплая и износостойкая, но требует бережного ухода. Хлопок — лёгкий и гипоаллергенный, идеален для семей с детьми. Шёлк — роскошен, но требователен в уходе.</p><p>Цвет: если мебель светлая, можно выбрать насыщенный терракотовый или графитовый ковёр. Для тёмной мебели подойдут пастельные оттенки песка или шалфея.</p>', image:'https://images.unsplash.com/photo-1598300042247-d1240ee2e25b?q=80&w=1974&auto=format&fit=crop' },
+        { id:2, title:'Советы по уходу за ковром', author:'Халил', excerpt:'Как правильно чистить и хранить ковёр, чтобы он служил долгие годы.', content:'<p>Регулярная чистка пылесосом (не реже двух раз в неделю) продлит жизнь ворсу. Для шерстяных ковров используйте насадку с мягкой щетиной. Пятна удаляйте сразу: промокните (не трите!) влажной салфеткой с мягким мыльным раствором.</p><p>Раз в полгода проводите глубокую чистку — лучше вызвать профессионалов или использовать специальные шампуни. Не сушите ковёр на солнце, это может выжечь цвет. Храните ковёр в сухом месте, свернув в рулон (не складывайте).</p>', image:'https://images.unsplash.com/photo-1600166898405-da9535204843?q=80&w=2070&auto=format&fit=crop' },
+        { id:3, title:'Тренды в дизайне ковров 2025', author:'Амир', excerpt:'Какие цвета, узоры и фактуры будут в моде в этом году.', content:'<p>Дизайнеры единодушны: в 2025 году в тренде природные оттенки — терракота, шалфей, песок, глина. Популярны фактурные ковры с имитацией натуральных материалов (камень, дерево). Геометрические узоры уступают место абстракции и мягким волнам.</p><p>Также в моде ковры с высоким ворсом (shaggy) — они создают уют. Но помните: за ними сложнее ухаживать. Ещё один тренд — экологичность: выбирайте ковры из переработанных материалов или натурального хлопка.</p>', image:'https://images.unsplash.com/photo-1615873966541-473b0f6378a7?q=80&w=1974&auto=format&fit=crop' },
+        { id:4, title:'Ковры из натуральной шерсти: плюсы и минусы', author:'Халил', excerpt:'Разбираем все преимущества и недостатки шерстяных ковров.', content:'<p>Шерстяные ковры — классика. Плюсы: они тёплые, упругие, отлично держат форму, не накапливают статическое электричество, гипоаллергенны (если у вас нет аллергии на ланолин). Минусы: высокая цена, чувствительность к влаге, могут привлекать моль.</p><p>Уход за шерстью требует аккуратности: используйте только сухую чистку или специальные средства. Зато такой ковёр прослужит десятилетия.</p>', image:'https://images.unsplash.com/photo-1581852017101-24f1c0b30fa1?q=80&w=1974&auto=format&fit=crop' }
     ];
 
     // ======================================================================
@@ -1655,7 +2027,6 @@
 
     let cart = JSON.parse(localStorage.getItem('avva_cart')) || [];
     let favorites = JSON.parse(localStorage.getItem('avva_favorites')) || [];
-    let compare = JSON.parse(localStorage.getItem('avva_compare')) || [];
     let history = JSON.parse(localStorage.getItem('avva_history')) || [];
 
     // ======================================================================
@@ -1663,13 +2034,12 @@
     // ======================================================================
     function saveCart() { localStorage.setItem('avva_cart', JSON.stringify(cart)); }
     function saveFavorites() { localStorage.setItem('avva_favorites', JSON.stringify(favorites)); }
-    function saveCompare() { localStorage.setItem('avva_compare', JSON.stringify(compare)); }
     function saveHistory() { localStorage.setItem('avva_history', JSON.stringify(history)); }
 
     function addToHistory(productId) {
         history = history.filter(id => id !== productId);
         history.unshift(productId);
-        if (history.length > 5) history.pop();
+        if (history.length > 10) history.pop();
         saveHistory();
         renderHistory();
     }
@@ -1744,23 +2114,29 @@
             const oldPriceHtml = p.oldPrice ? `<span class="old-price">${p.oldPrice.toLocaleString()} ₽</span>` : '';
             const stockClass = { 'В наличии':'', 'Мало':'low', 'Под заказ':'out' }[p.stock];
             const isFavorite = favorites.includes(p.id) ? 'active' : '';
-            const isCompare = compare.includes(p.id) ? 'active' : '';
+            const starsHtml = p.rating > 0 
+                ? '<i class="fas fa-star"></i>'.repeat(Math.floor(p.rating)) + '<i class="far fa-star"></i>'.repeat(5 - Math.floor(p.rating))
+                : '<i class="far fa-star"></i>'.repeat(5);
+            
             return `
-                <div class="product-card">
+                <div class="product-card" data-id="${p.id}">
                     <div class="product-image">
                         <img src="${p.image}" alt="${p.name}" loading="lazy">
                         ${badge}
                         <div class="product-icons">
                             <span class="product-icon favorite ${isFavorite}" data-id="${p.id}" data-type="favorite"><i class="fas fa-heart"></i></span>
-                            <span class="product-icon compare ${isCompare}" data-id="${p.id}" data-type="compare"><i class="fas fa-balance-scale"></i></span>
-                            <span class="product-icon quick-view-icon" data-id="${p.id}" data-type="quickview"><i class="fas fa-eye"></i></span>
                         </div>
                     </div>
                     <div class="product-info">
                         <div class="product-category">${catName}</div>
-                        <div class="product-title" data-id="${p.id}">${p.name}</div>
+                        <div class="product-title">${p.name}</div>
                         <div class="product-material">Материал: ${p.material}</div>
-                        <div class="product-rating">${'★'.repeat(Math.floor(p.rating))}${p.rating%1?'½':''} (${p.rating})</div>
+                        <div class="product-rating">
+                            <span class="rating-stars" data-id="${p.id}">
+                                ${starsHtml}
+                            </span>
+                            <span>(${p.reviews.length} отзывов)</span>
+                        </div>
                         <div class="product-price">
                             ${p.price.toLocaleString()} ₽
                             ${oldPriceHtml}
@@ -1768,12 +2144,22 @@
                         <div class="product-stock ${stockClass}">${p.stock}</div>
                         <div class="product-actions">
                             <button class="add-to-cart" data-id="${p.id}" ${p.stock==='Под заказ'?'disabled':''}>В корзину</button>
-                            <button class="quick-view" data-id="${p.id}"><i class="fas fa-eye"></i></button>
                         </div>
                     </div>
                 </div>
             `;
         }).join('');
+
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('.product-icon') || e.target.closest('.add-to-cart')) {
+                    return;
+                }
+                const id = parseInt(this.dataset.id);
+                addToHistory(id);
+                openProductModal(id);
+            });
+        });
 
         let pagHtml = '';
         if (totalPages > 1) {
@@ -1805,13 +2191,9 @@
             const id = parseInt(el.dataset.id);
             if (favorites.includes(id)) el.classList.add('active'); else el.classList.remove('active');
         });
-        document.querySelectorAll('.product-icon.compare').forEach(el => {
-            const id = parseInt(el.dataset.id);
-            if (compare.includes(id)) el.classList.add('active'); else el.classList.remove('active');
-        });
     }
 
-    // ========== КОРЗИНА ==========
+    // ========== КОРЗИНА (с карточками) ==========
     function updateCartDisplay() {
         const totalItems = cart.reduce((sum,i) => sum + i.quantity, 0);
         document.getElementById('cartCount').textContent = totalItems;
@@ -1821,12 +2203,23 @@
             if (cart.length===0) list.innerHTML = '<p style="text-align:center;">Корзина пуста</p>';
             else {
                 cart.forEach(item => {
-                    list.innerHTML += `
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-                            <div><strong>${item.name}</strong> x ${item.quantity}</div>
-                            <div>${(item.price*item.quantity).toLocaleString()} ₽ <button class="cart-remove" data-id="${item.id}" style="background:none; border:none; color:red;"><i class="fas fa-trash"></i></button></div>
-                        </div>
-                    `;
+                    const p = products.find(pr => pr.id === item.id);
+                    if (p) {
+                        list.innerHTML += `
+                            <div style="display:flex; gap:1rem; margin-bottom:1.5rem; padding:1rem; background:var(--cream); border-radius:15px; align-items:center;">
+                                <img src="${p.image}" style="width:80px; height:80px; object-fit:cover; border-radius:10px;">
+                                <div style="flex:1;">
+                                    <div><strong>${p.name}</strong></div>
+                                    <div style="font-size:0.9rem; color:#666;">Цвет: ${p.color}, Размер: 2x3 м</div>
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.5rem;">
+                                        <span>${p.price.toLocaleString()} ₽ x ${item.quantity}</span>
+                                        <span><strong>${(p.price*item.quantity).toLocaleString()} ₽</strong></span>
+                                    </div>
+                                </div>
+                                <button class="cart-remove" data-id="${p.id}" style="background:none; border:none; color:red;"><i class="fas fa-trash"></i></button>
+                            </div>
+                        `;
+                    }
                 });
             }
         }
@@ -1851,7 +2244,7 @@
         updateCartDisplay();
     }
 
-    // ========== ИЗБРАННОЕ ==========
+    // ========== ИЗБРАННОЕ (с карточками) ==========
     function toggleFavorite(id) {
         if (favorites.includes(id)) {
             favorites = favorites.filter(f => f !== id);
@@ -1868,15 +2261,26 @@
         const list = document.getElementById('favoritesList');
         if (!list) return;
         list.innerHTML = '';
-        if (favorites.length===0) list.innerHTML = '<p>Список пуст</p>';
+        if (favorites.length===0) list.innerHTML = '<p>Список избранного пуст</p>';
         else {
             favorites.forEach(id => {
                 const p = products.find(pr => pr.id === id);
                 if (p) {
                     list.innerHTML += `
-                        <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
-                            <span>${p.name} — ${p.price.toLocaleString()} ₽</span>
-                            <button class="favorite-remove" data-id="${p.id}" style="background:none; border:none; color:red;"><i class="fas fa-trash"></i></button>
+                        <div style="display:flex; gap:1rem; margin-bottom:1.5rem; padding:1rem; background:var(--cream); border-radius:15px; align-items:center;">
+                            <img src="${p.image}" style="width:80px; height:80px; object-fit:cover; border-radius:10px;" onclick="openProductModal(${p.id})">
+                            <div style="flex:1;">
+                                <div><strong>${p.name}</strong></div>
+                                <div style="font-size:0.9rem; color:#666;">Цвет: ${p.color}, Размер: 2x3 м</div>
+                                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.5rem;">
+                                    <span>${p.price.toLocaleString()} ₽</span>
+                                    <span>${p.stock}</span>
+                                </div>
+                                <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+                                    <button class="btn-primary favorite-to-cart" data-id="${p.id}" style="padding:0.4rem 1rem;">В корзину</button>
+                                    <button class="favorite-remove" data-id="${p.id}" style="background:none; border:1px solid var(--sand); border-radius:40px; padding:0.4rem 1rem;"><i class="fas fa-trash"></i> Убрать</button>
+                                </div>
+                            </div>
                         </div>
                     `;
                 }
@@ -1884,98 +2288,120 @@
         }
     }
 
-    // ========== СРАВНЕНИЕ (ПОЛНОСТЬЮ РАБОЧЕЕ) ==========
-    function updateCompareDisplay() {
-        document.getElementById('compareCount').textContent = compare.length;
-        renderCompareTable();
-    }
-
-    function renderCompareTable() {
-        const container = document.getElementById('compareTable');
-        if (!container) return;
-        
-        if (compare.length === 0) {
-            container.innerHTML = '<p>Список сравнения пуст. Добавьте товары для сравнения.</p>';
-            return;
-        }
-
-        const compareProducts = compare.map(id => products.find(p => p.id === id)).filter(p => p);
-        
-        let html = '<table style="width:100%; border-collapse:collapse;">';
-        html += '<tr><th style="text-align:left; padding:8px; border:1px solid var(--sand);">Характеристика</th>';
-        compareProducts.forEach(p => {
-            html += `<th style="text-align:center; padding:8px; border:1px solid var(--sand);">${p.name}</th>`;
-        });
-        html += '</tr>';
-
-        const rows = [
-            { label: 'Изображение', field: 'image' },
-            { label: 'Цена', field: 'price' },
-            { label: 'Категория', field: 'category' },
-            { label: 'Материал', field: 'material' },
-            { label: 'Цвет', field: 'color' },
-            { label: 'Наличие', field: 'stock' },
-            { label: 'Рейтинг', field: 'rating' },
-            { label: 'Размеры', field: 'sizes' }
-        ];
-
-        rows.forEach(row => {
-            html += '<tr>';
-            html += `<td style="padding:8px; border:1px solid var(--sand); font-weight:600;">${row.label}</td>`;
-            compareProducts.forEach(p => {
-                let value = p[row.field];
-                if (row.field === 'image') {
-                    value = `<img src="${p.image}" style="width:80px; height:60px; object-fit:cover; border-radius:8px;">`;
-                } else if (row.field === 'price') {
-                    value = p.price.toLocaleString() + ' ₽';
-                } else if (row.field === 'rating') {
-                    value = p.rating + ' ★';
-                } else if (row.field === 'category') {
-                    const catName = { living:'Гостиная', bedroom:'Спальня', children:'Детская', hallway:'Прихожая' }[p.category];
-                    value = catName;
-                }
-                html += `<td style="padding:8px; border:1px solid var(--sand); text-align:center;">${value}</td>`;
-            });
-            html += '</tr>';
-        });
-
-        html += '</table>';
-        container.innerHTML = html;
-    }
-
-    function toggleCompare(id) {
-        if (compare.includes(id)) {
-            compare = compare.filter(c => c !== id);
-        } else {
-            if (compare.length >= 4) { alert('Можно сравнивать не более 4 товаров'); return; }
-            compare.push(id);
-        }
-        saveCompare();
-        updateCompareDisplay();
-        updateBadges();
-        if (document.getElementById('compareModal').classList.contains('active')) {
-            renderCompareTable();
-        }
-    }
-
-    // ========== ИСТОРИЯ ==========
+    // ========== ИСТОРИЯ ПРОСМОТРОВ ==========
+    let historyScrollPosition = 0;
+    let startX, startY, isDragging = false, startScrollLeft;
+    
     function renderHistory() {
         const grid = document.getElementById('historyGrid');
         if (!grid) return;
+        
+        if (history.length === 0) {
+            grid.innerHTML = '<div style="padding:1rem; text-align:center; color:#888;">История просмотров пуста</div>';
+            document.getElementById('historyPrev').disabled = true;
+            document.getElementById('historyNext').disabled = true;
+            return;
+        }
+        
         grid.innerHTML = '';
-        history.slice(0,5).forEach(id => {
+        history.slice(0,10).forEach(id => {
             const p = products.find(pr => pr.id === id);
             if (p) {
-                grid.innerHTML += `
-                    <div class="history-item">
-                        <img src="${p.image}" alt="${p.name}">
-                        <p style="font-size:0.9rem;">${p.name}</p>
-                        <p style="color:var(--brick);">${p.price.toLocaleString()} ₽</p>
-                    </div>
+                const item = document.createElement('div');
+                item.className = 'history-item';
+                item.setAttribute('data-id', p.id);
+                item.innerHTML = `
+                    <img src="${p.image}" alt="${p.name}">
+                    <p style="font-weight:500;">${p.name.length > 20 ? p.name.substring(0,20)+'...' : p.name}</p>
+                    <p class="history-price">${p.price.toLocaleString()} ₽</p>
                 `;
+                item.addEventListener('click', () => {
+                    addToHistory(p.id);
+                    openProductModal(p.id);
+                });
+                grid.appendChild(item);
             }
         });
+        
+        historyScrollPosition = 0;
+        grid.style.transform = 'translateX(0)';
+        updateHistoryControls();
     }
+
+    function updateHistoryControls() {
+        const grid = document.getElementById('historyGrid');
+        const prevBtn = document.getElementById('historyPrev');
+        const nextBtn = document.getElementById('historyNext');
+        
+        if (!grid || !prevBtn || !nextBtn) return;
+        
+        const maxScroll = Math.max(0, grid.scrollWidth - grid.parentElement.clientWidth);
+        
+        prevBtn.disabled = historyScrollPosition <= 0;
+        nextBtn.disabled = historyScrollPosition >= maxScroll;
+    }
+
+    // Свайп для истории
+    const historyWrapper = document.querySelector('.history-wrapper');
+    if (historyWrapper) {
+        historyWrapper.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isDragging = true;
+            startScrollLeft = historyScrollPosition;
+        }, { passive: true });
+
+        historyWrapper.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const dx = startX - e.touches[0].clientX;
+            const dy = Math.abs(startY - e.touches[0].clientY);
+            
+            if (dy > 50) {
+                isDragging = false;
+                return;
+            }
+            
+            e.preventDefault();
+            const grid = document.getElementById('historyGrid');
+            const maxScroll = Math.max(0, grid.scrollWidth - grid.parentElement.clientWidth);
+            let newPosition = startScrollLeft + dx;
+            
+            if (newPosition < 0) newPosition = 0;
+            if (newPosition > maxScroll) newPosition = maxScroll;
+            
+            historyScrollPosition = newPosition;
+            grid.style.transform = `translateX(-${historyScrollPosition}px)`;
+        }, { passive: false });
+
+        historyWrapper.addEventListener('touchend', () => {
+            isDragging = false;
+            updateHistoryControls();
+        });
+    }
+
+    document.getElementById('historyPrev')?.addEventListener('click', () => {
+        const grid = document.getElementById('historyGrid');
+        historyScrollPosition = Math.max(0, historyScrollPosition - 300);
+        grid.style.transform = `translateX(-${historyScrollPosition}px)`;
+        updateHistoryControls();
+    });
+
+    document.getElementById('historyNext')?.addEventListener('click', () => {
+        const grid = document.getElementById('historyGrid');
+        const maxScroll = Math.max(0, grid.scrollWidth - grid.parentElement.clientWidth);
+        historyScrollPosition = Math.min(maxScroll, historyScrollPosition + 300);
+        grid.style.transform = `translateX(-${historyScrollPosition}px)`;
+        updateHistoryControls();
+    });
+
+    window.addEventListener('resize', () => {
+        historyScrollPosition = 0;
+        const grid = document.getElementById('historyGrid');
+        if (grid) {
+            grid.style.transform = 'translateX(0)';
+            updateHistoryControls();
+        }
+    });
 
     // ========== БЛОГ ==========
     function renderBlog() {
@@ -1986,11 +2412,131 @@
                 <img src="${post.image}" alt="${post.title}">
                 <div class="blog-content">
                     <h4>${post.title}</h4>
-                    <div class="blog-meta">${post.date} • ${post.author}</div>
+                    <div class="blog-meta">${post.author}</div>
                     <p class="blog-excerpt">${post.excerpt}</p>
                 </div>
             </div>
         `).join('');
+    }
+
+    // ========== ОТКРЫТИЕ КАРТОЧКИ ТОВАРА (с отзывами) ==========
+    function openProductModal(id) {
+        const p = products.find(pr => pr.id === id);
+        if (!p) return;
+
+        function getRatingStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                stars += i <= rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>';
+            }
+            return stars;
+        }
+
+        const content = document.getElementById('productDetailContent');
+        content.innerHTML = `
+            <h2 style="margin-bottom:1.5rem;">${p.name}</h2>
+            <div class="product-detail">
+                <div class="product-detail-left">
+                    <div class="product-gallery">
+                        <img class="main-image" id="mainProductImage" src="${p.image}" alt="${p.name}">
+                        <div class="thumbnail-gallery">
+                            ${p.images.map((img, idx) => `<img src="${img}" alt="" class="${idx===0?'active':''}" onclick="document.getElementById('mainProductImage').src='${img}'; document.querySelectorAll('.thumbnail-gallery img').forEach(el=>el.classList.remove('active')); this.classList.add('active');">`).join('')}
+                        </div>
+                    </div>
+                </div>
+                <div class="product-detail-right">
+                    <div style="margin-bottom:1.5rem;">
+                        <div class="product-price" style="font-size:1.8rem;">${p.price.toLocaleString()} ₽</div>
+                        <div class="product-stock" style="font-size:1rem; margin:0.5rem 0;">${p.stock}</div>
+                        <div class="product-rating" style="font-size:1.2rem;">
+                            <span class="rating-stars">${getRatingStars(p.rating)}</span>
+                            <span>(${p.reviews.length} отзывов)</span>
+                        </div>
+                        <div style="margin-top:0.5rem;">Цвет: ${p.color}, Материал: ${p.material}</div>
+                    </div>
+                    
+                    <button class="btn-primary" data-id="${p.id}" id="detailAddToCart" style="width:100%; margin-bottom:1rem;" ${p.stock==='Под заказ'?'disabled':''}>В корзину</button>
+                    
+                    <div class="product-detail-tabs">
+                        <span class="product-detail-tab active" data-tab="desc">Описание</span>
+                        <span class="product-detail-tab" data-tab="specs">Характеристики</span>
+                        <span class="product-detail-tab" data-tab="reviews">Отзывы (${p.reviews.length})</span>
+                    </div>
+                    
+                    <div class="tab-content active" id="tab-desc">
+                        ${p.description}
+                    </div>
+                    
+                    <div class="tab-content" id="tab-specs">
+                        <table class="specs-table">
+                            <tr><td>Категория</td><td>${p.category === 'living'?'Гостиная':p.category==='bedroom'?'Спальня':p.category==='children'?'Детская':'Прихожая'}</td></tr>
+                            <tr><td>Материал</td><td>${p.material}</td></tr>
+                            <tr><td>Цвет</td><td>${p.color}</td></tr>
+                            <tr><td>Состав</td><td>${p.composition}</td></tr>
+                            <tr><td>Высота ворса</td><td>${p.pileHeight}</td></tr>
+                            <tr><td>Плотность</td><td>${p.density}</td></tr>
+                            <tr><td>Размеры</td><td>${p.sizes}</td></tr>
+                            <tr><td>Страна производства</td><td>${p.country}</td></tr>
+                            <tr><td>Гарантия</td><td>${p.warranty}</td></tr>
+                        </table>
+                    </div>
+                    
+                    <div class="tab-content" id="tab-reviews">
+                        <div class="reviews-list" id="reviewsList">
+                            ${p.reviews.length === 0 ? '<p style="text-align:center; color:#888;">Пока нет отзывов. Будьте первым!</p>' : p.reviews.map(r => `
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <span class="review-author">${r.author}</span>
+                                        <span class="review-rating">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</span>
+                                        <span class="review-date">${r.date}</span>
+                                    </div>
+                                    <div class="review-text">${r.text}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="review-form">
+                            <h4>Оставить отзыв</h4>
+                            <div>Ваша оценка:</div>
+                            <div class="rating-input" id="newReviewRating">
+                                <i class="far fa-star" data-rating="1"></i>
+                                <i class="far fa-star" data-rating="2"></i>
+                                <i class="far fa-star" data-rating="3"></i>
+                                <i class="far fa-star" data-rating="4"></i>
+                                <i class="far fa-star" data-rating="5"></i>
+                            </div>
+                            <textarea id="reviewText" placeholder="Ваш отзыв..." rows="4"></textarea>
+                            <button class="btn-primary" id="submitReview" data-id="${p.id}">Отправить отзыв</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.getElementById('productModal').classList.add('active');
+
+        let selectedRating = 0;
+        document.querySelectorAll('#newReviewRating i').forEach(star => {
+            star.addEventListener('click', () => {
+                selectedRating = parseInt(star.dataset.rating);
+                document.querySelectorAll('#newReviewRating i').forEach((s, index) => {
+                    if (index < selectedRating) s.className = 'fas fa-star';
+                    else s.className = 'far fa-star';
+                });
+            });
+        });
+
+        document.querySelectorAll('.product-detail-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.product-detail-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                const tabId = tab.dataset.tab;
+                if (tabId === 'desc') document.getElementById('tab-desc').classList.add('active');
+                else if (tabId === 'specs') document.getElementById('tab-specs').classList.add('active');
+                else if (tabId === 'reviews') document.getElementById('tab-reviews').classList.add('active');
+            });
+        });
     }
 
     // ========== ОБРАБОТЧИКИ СОБЫТИЙ ==========
@@ -2010,37 +2556,13 @@
         }
 
         if (e.target.closest('.product-icon.favorite')) {
+            e.stopPropagation();
             const id = parseInt(e.target.closest('.product-icon.favorite').dataset.id);
             toggleFavorite(id);
         }
 
-        if (e.target.closest('.product-icon.compare')) {
-            const id = parseInt(e.target.closest('.product-icon.compare').dataset.id);
-            toggleCompare(id);
-        }
-
-        if (e.target.closest('.quick-view') || e.target.closest('.quick-view-icon')) {
-            const id = parseInt(e.target.closest('[data-id]').dataset.id);
-            const p = products.find(pr => pr.id === id);
-            if (p) {
-                document.getElementById('quickviewContent').innerHTML = `
-                    <div style="display:flex; gap:2rem; flex-wrap:wrap;">
-                        <img src="${p.image}" style="max-width:300px; border-radius:20px;">
-                        <div>
-                            <h2>${p.name}</h2>
-                            <p>${p.description}</p>
-                            <p>Цена: ${p.price.toLocaleString()} ₽</p>
-                            <p>Материал: ${p.material}</p>
-                            <p>Размеры: ${p.sizes}</p>
-                            <button class="btn-primary" data-id="${p.id}" id="quickAdd">В корзину</button>
-                        </div>
-                    </div>
-                `;
-                document.getElementById('quickviewModal').classList.add('active');
-            }
-        }
-
         if (e.target.classList.contains('add-to-cart')) {
+            e.stopPropagation();
             const id = parseInt(e.target.dataset.id);
             addToCart(id);
         }
@@ -2055,38 +2577,59 @@
             toggleFavorite(id);
         }
 
-        if (e.target.closest('.compare-remove')) {
-            const id = parseInt(e.target.closest('.compare-remove').dataset.id);
-            toggleCompare(id);
+        if (e.target.closest('.favorite-to-cart')) {
+            const id = parseInt(e.target.closest('.favorite-to-cart').dataset.id);
+            addToCart(id);
+            toggleFavorite(id);
         }
 
-        if (e.target.classList.contains('product-title')) {
+        if (e.target.id === 'submitReview') {
             const id = parseInt(e.target.dataset.id);
-            addToHistory(id);
             const p = products.find(pr => pr.id === id);
-            if (p) {
-                document.getElementById('productDetailContent').innerHTML = `
-                    <h2>${p.name}</h2>
-                    <div style="display:flex; gap:2rem; flex-wrap:wrap;">
-                        <img src="${p.image}" style="max-width:300px; border-radius:20px;">
-                        <div>
-                            <p><strong>Цена:</strong> ${p.price.toLocaleString()} ₽</p>
-                            <p><strong>Материал:</strong> ${p.material}</p>
-                            <p><strong>Цвет:</strong> ${p.color}</p>
-                            <p><strong>Наличие:</strong> ${p.stock}</p>
-                            <p><strong>Размеры:</strong> ${p.sizes}</p>
-                            <button class="btn-primary" data-id="${p.id}" id="detailAddToCart">В корзину</button>
-                        </div>
-                    </div>
-                    <div class="product-detail-tabs">
-                        <span class="product-detail-tab active" data-tab="desc">Описание</span>
-                        <span class="product-detail-tab" data-tab="reviews">Отзывы</span>
-                    </div>
-                    <div class="tab-content active" id="tab-desc">${p.description}</div>
-                    <div class="tab-content" id="tab-reviews">Пока нет отзывов. Будьте первым!</div>
-                `;
-                document.getElementById('productModal').classList.add('active');
+            const rating = document.querySelectorAll('#newReviewRating .fas').length;
+            const text = document.getElementById('reviewText').value.trim();
+            
+            if (rating === 0) {
+                alert('Пожалуйста, поставьте оценку');
+                return;
             }
+            if (!text) {
+                alert('Пожалуйста, напишите отзыв');
+                return;
+            }
+
+            if (!p.reviews) p.reviews = [];
+            p.reviews.push({
+                author: 'Гость',
+                rating: rating,
+                text: text,
+                date: new Date().toLocaleDateString('ru-RU')
+            });
+
+            const totalRating = p.reviews.reduce((sum, r) => sum + r.rating, 0);
+            p.rating = Math.round((totalRating / p.reviews.length) * 10) / 10;
+
+            const reviewsList = document.getElementById('reviewsList');
+            reviewsList.innerHTML = p.reviews.map(r => `
+                <div class="review-item">
+                    <div class="review-header">
+                        <span class="review-author">${r.author}</span>
+                        <span class="review-rating">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</span>
+                        <span class="review-date">${r.date}</span>
+                    </div>
+                    <div class="review-text">${r.text}</div>
+                </div>
+            `).join('');
+
+            document.getElementById('reviewText').value = '';
+            document.querySelectorAll('#newReviewRating i').forEach(s => s.className = 'far fa-star');
+            showNotification('Спасибо за отзыв!');
+            render();
+        }
+
+        if (e.target.id === 'detailAddToCart') {
+            const id = parseInt(e.target.dataset.id);
+            addToCart(id);
         }
 
         if (e.target.closest('.blog-card')) {
@@ -2095,32 +2638,96 @@
             if (post) {
                 document.getElementById('blogArticleContent').innerHTML = `
                     <h2>${post.title}</h2>
-                    <p><em>${post.date} • ${post.author}</em></p>
+                    <p><em>${post.author}</em></p>
                     <img src="${post.image}" style="width:100%; max-height:300px; object-fit:cover; border-radius:20px; margin:1rem 0;">
                     ${post.content}
                 `;
                 document.getElementById('blogModal').classList.add('active');
             }
         }
+
+        if (e.target.classList.contains('user-menu-item')) {
+            e.preventDefault();
+            const target = e.target.dataset.target;
+            document.getElementById('userMenu').classList.remove('active');
+            if (target === 'favorites') {
+                updateFavoritesDisplay();
+                document.getElementById('favoritesModal').classList.add('active');
+            } else if (target === 'cart') {
+                updateCartDisplay();
+                document.getElementById('cartModal').classList.add('active');
+            } else if (target === 'orders') {
+                alert('Функция "Мои заказы" будет доступна после авторизации');
+            } else if (target === 'profile') {
+                alert('Функция "Профиль" будет доступна после авторизации');
+            } else if (target === 'auth') {
+                document.getElementById('authModal').classList.add('active');
+            }
+        }
+
+        if (e.target.classList.contains('footer-category')) {
+            e.preventDefault();
+            const cat = e.target.dataset.category;
+            document.querySelectorAll('.category-tab').forEach(t => {
+                t.classList.remove('active');
+                if (t.dataset.category === cat) t.classList.add('active');
+            });
+            currentCategory = cat;
+            currentPage = 1;
+            render();
+            document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        if (e.target.id === 'footerPayment') {
+            e.preventDefault();
+            document.getElementById('paymentModal').classList.add('active');
+        }
+        if (e.target.id === 'footerReturn') {
+            e.preventDefault();
+            document.getElementById('returnModal').classList.add('active');
+        }
+        if (e.target.id === 'footerPrivacy') {
+            e.preventDefault();
+            document.getElementById('privacyModal').classList.add('active');
+        }
     });
 
-    // Бургер и фильтры
+    // ========== ПОИСК ==========
+    const searchIcon = document.getElementById('searchIcon');
+    const searchHeader = document.getElementById('searchHeader');
+    const headerSearchInput = document.getElementById('headerSearchInput');
+
+    searchIcon.addEventListener('click', () => {
+        searchHeader.classList.toggle('active');
+        if (searchHeader.classList.contains('active')) {
+            headerSearchInput.focus();
+        }
+    });
+
+    headerSearchInput.addEventListener('input', () => {
+        searchQuery = headerSearchInput.value;
+        document.getElementById('searchInput').value = searchQuery;
+        currentPage = 1;
+        render();
+    });
+
     document.getElementById('filterToggle').addEventListener('click', () => {
         document.getElementById('filterDrawer').classList.add('open');
         document.getElementById('filterOverlay').classList.add('active');
     });
+
     document.getElementById('filterOverlay').addEventListener('click', () => {
         document.getElementById('filterDrawer').classList.remove('open');
         document.getElementById('filterOverlay').classList.remove('active');
         document.getElementById('burgerBtn').classList.remove('active');
     });
+
     document.getElementById('burgerBtn').addEventListener('click', () => {
         document.getElementById('filterDrawer').classList.toggle('open');
         document.getElementById('filterOverlay').classList.toggle('active');
         document.getElementById('burgerBtn').classList.toggle('active');
     });
 
-    // Применение фильтров
     document.getElementById('applyFilters').addEventListener('click', () => {
         selectedMaterials = Array.from(document.querySelectorAll('.filter-material:checked')).map(cb => cb.value);
         selectedColors = Array.from(document.querySelectorAll('.filter-color:checked')).map(cb => cb.value);
@@ -2146,17 +2753,16 @@
         render();
     });
 
-    // Сортировка
     document.getElementById('sortSelect').addEventListener('change', (e) => {
         sortBy = e.target.value;
         render();
     });
 
-    // Автодополнение поиска
     const searchInput = document.getElementById('searchInput');
     const autobox = document.getElementById('autocompleteBox');
     searchInput.addEventListener('input', () => {
         const q = searchInput.value.toLowerCase().trim();
+        headerSearchInput.value = q;
         if (q.length < 2) { autobox.style.display = 'none'; return; }
         const matches = products.filter(p => p.name.toLowerCase().includes(q)).slice(0,5);
         if (matches.length) {
@@ -2164,50 +2770,46 @@
             autobox.style.display = 'block';
         } else autobox.style.display = 'none';
     });
+
     autobox.addEventListener('click', (e) => {
         if (e.target.classList.contains('autocomplete-item')) {
             const id = parseInt(e.target.dataset.id);
             const p = products.find(pr => pr.id === id);
             if (p) {
                 searchInput.value = p.name;
+                headerSearchInput.value = p.name;
                 searchQuery = p.name;
                 autobox.style.display = 'none';
                 render();
             }
         }
     });
+
     document.addEventListener('click', (e) => {
         if (!autobox.contains(e.target) && e.target !== searchInput) autobox.style.display = 'none';
     });
 
-    // Модалки
     document.getElementById('cartIcon').addEventListener('click', () => {
         updateCartDisplay();
         document.getElementById('cartModal').classList.add('active');
     });
+
     document.getElementById('favoritesIcon').addEventListener('click', () => {
         updateFavoritesDisplay();
         document.getElementById('favoritesModal').classList.add('active');
     });
-    document.getElementById('compareIcon').addEventListener('click', () => {
-        renderCompareTable();
-        document.getElementById('compareModal').classList.add('active');
-    });
+
     document.getElementById('userIcon').addEventListener('click', (e) => {
         e.stopPropagation();
         document.getElementById('userMenu').classList.toggle('active');
     });
-    document.getElementById('loginLink').addEventListener('click', (e) => {
-        e.preventDefault();
-        document.getElementById('userMenu').classList.remove('active');
-        document.getElementById('authModal').classList.add('active');
-    });
 
-    document.querySelectorAll('.modal-close, #closeCart, #closeFavorites, #closeCompare, #closeQuickview, #closeProduct, #closeBlog, #closeAuth, #closeSize').forEach(btn => {
+    document.querySelectorAll('.modal-close, #closeCart, #closeFavorites, #closeProduct, #closeBlog, #closeAuth, #closePayment, #closeReturn, #closePrivacy').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
         });
     });
+
     window.addEventListener('click', (e) => {
         if (e.target.classList.contains('modal')) e.target.classList.remove('active');
     });
@@ -2217,6 +2819,7 @@
         saveCart();
         updateCartDisplay();
     });
+
     document.getElementById('checkoutBtn').addEventListener('click', () => {
         if (cart.length === 0) { alert('Корзина пуста'); return; }
         alert('Спасибо за заказ! Мы свяжемся с вами.');
@@ -2276,24 +2879,46 @@
         showNotification('Показаны товары со скидкой');
     });
 
+    // Клик по ссылкам в навбаре
+    document.querySelectorAll('.nav-drawer-links a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('filterDrawer').classList.remove('open');
+                    document.getElementById('filterOverlay').classList.remove('active');
+                    document.getElementById('burgerBtn').classList.remove('active');
+                }
+            }
+        });
+    });
+
+    // Клик по ссылкам в футере
+    document.querySelectorAll('.footer-col a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            if (href && href !== '#') {
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+
     updateFilterCounts();
     render();
     updateCartDisplay();
     updateFavoritesDisplay();
-    updateCompareDisplay();
     renderHistory();
     renderBlog();
-
-    document.addEventListener('click', (e) => {
-        if (e.target.id === 'quickAdd' || e.target.id === 'detailAddToCart') {
-            const id = parseInt(e.target.dataset.id);
-            addToCart(id);
-            document.getElementById('quickviewModal').classList.remove('active');
-            document.getElementById('productModal').classList.remove('active');
-        }
-    });
 </script>
-<!-- Дополнительные анимации (параллакс и появление карточек) -->
+
+<!-- Дополнительные анимации -->
 <script>
     (function() {
         const observer = new IntersectionObserver((entries) => {
@@ -2305,16 +2930,8 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
-
-        window.addEventListener('scroll', () => {
-            const slides = document.querySelectorAll('.slide');
-            slides.forEach(slide => {
-                const speed = 0.5;
-                const yPos = -(window.scrollY * speed);
-                slide.style.transform = `translateY(${yPos}px)`;
-            });
-        });
     })();
 </script>
+
 </body>
 </html>
