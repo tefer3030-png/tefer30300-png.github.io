@@ -323,9 +323,8 @@
         /* ========== АДАПТАЦИЯ ШАПКИ ========== */
         @media (max-width: 900px) {
             .logo {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
+                position: static;
+                transform: none;
                 font-size: 1.5rem;
                 white-space: nowrap;
             }
@@ -345,7 +344,10 @@
             }
         }
         
-        @media (max-width: 480px) {
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 0.6rem 2%;
+            }
             .logo {
                 font-size: 1.3rem;
             }
@@ -356,20 +358,16 @@
                 gap: 0.8rem;
                 font-size: 1.1rem;
             }
-            .nav-icon-btn {
-                min-width: 40px;
-                min-height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
             .burger-btn {
                 width: 22px;
                 height: 16px;
             }
         }
         
-        @media (max-width: 360px) {
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.5rem 2%;
+            }
             .logo {
                 font-size: 1.1rem;
             }
@@ -379,6 +377,47 @@
             .nav-icons {
                 gap: 0.5rem;
                 font-size: 1rem;
+            }
+            .nav-icon-btn {
+                min-width: 36px;
+                min-height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .burger-btn {
+                width: 20px;
+                height: 14px;
+                min-width: 36px;
+                min-height: 36px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 3px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .logo {
+                font-size: 1rem;
+            }
+            .logo-text {
+                font-size: 0.8rem;
+            }
+            .nav-icons {
+                gap: 0.3rem;
+                font-size: 0.9rem;
+            }
+            .nav-icon-btn {
+                min-width: 32px;
+                min-height: 32px;
+            }
+            .cart-count, .favorites-count {
+                top: -5px;
+                right: -5px;
+                font-size: 0.6rem;
+                min-width: 16px;
+                padding: 1px 4px;
             }
         }
         
@@ -2339,6 +2378,44 @@
                 max-width: 100px;
             }
         }
+        /* Дополнительная адаптация для очень маленьких экранов */
+        @media (max-width: 360px) {
+            .logo {
+                font-size: 1rem;
+            }
+            .logo-text {
+                font-size: 0.8rem;
+            }
+            .nav-icons {
+                gap: 0.3rem;
+            }
+            .nav-icon-btn {
+                min-width: 36px;
+                min-height: 36px;
+            }
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+            .product-image {
+                height: 120px;
+            }
+            .product-title {
+                font-size: 0.8rem;
+            }
+            .product-price {
+                font-size: 0.9rem;
+            }
+            .add-to-cart {
+                padding: 0.4rem 0.3rem;
+                font-size: 0.7rem;
+                min-height: 36px;
+            }
+            .size-selector select {
+                font-size: 0.7rem;
+                padding: 0.3rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2783,8 +2860,8 @@
         
         const SIZE_OPTIONS = [
             { value: '2x3', label: '2x3 м' },
-            { value: '2.5x3.5', label: '2.5x3.5 м (+30%)' },
-            { value: '3x4', label: '3x4 м (+50%)' }
+            { value: '2.5x3.5', label: '2.5x3.5 м' },
+            { value: '3x4', label: '3x4 м' }
         ];
         
         // Генерация товаров (100% рабочие фото с Pexels)
@@ -2819,8 +2896,8 @@
             const mat = materials[Math.floor(Math.random() * materials.length)];
             const col = colors[Math.floor(Math.random() * colors.length)];
             const stock = stockStatuses[Math.floor(Math.random() * stockStatuses.length)];
-            const price = Math.floor(Math.random() * 15000) + 2000;
-            const oldPrice = Math.random() > 0.7 ? price + Math.floor(Math.random() * 5000) : null;
+            const basePrice = Math.floor(Math.random() * 15000) + 2000;
+            const oldPrice = Math.random() > 0.7 ? basePrice + Math.floor(Math.random() * 5000) : null;
             const name = `Ковёр "${names[i % names.length]}"`;
             products.push({
                 id: i,
@@ -2828,8 +2905,7 @@
                 category: cat,
                 material: mat,
                 color: col,
-                basePrice: price,
-                price: price,
+                basePrice: basePrice,
                 oldPrice: oldPrice,
                 stock: stock,
                 rating: 0,
@@ -3009,7 +3085,7 @@
                     if (AppState.selectedStock.includes('out') && p.stock !== 'Под заказ') return false;
                 }
                 
-                if (p.price < AppState.minPrice || p.price > AppState.maxPrice) return false;
+                if (p.basePrice < AppState.minPrice || p.basePrice > AppState.maxPrice) return false;
                 
                 return true;
             });
@@ -3019,10 +3095,10 @@
             const sorted = [...arr];
             switch (AppState.sortBy) {
                 case 'price-asc':
-                    sorted.sort((a, b) => a.price - b.price);
+                    sorted.sort((a, b) => a.basePrice - b.basePrice);
                     break;
                 case 'price-desc':
-                    sorted.sort((a, b) => b.price - a.price);
+                    sorted.sort((a, b) => b.basePrice - a.basePrice);
                     break;
                 case 'name-asc':
                     sorted.sort((a, b) => a.name.localeCompare(b.name));
@@ -3034,7 +3110,7 @@
                     sorted.sort((a, b) => b.rating - a.rating);
                     break;
                 case 'discount-desc':
-                    sorted.sort((a, b) => (b.oldPrice ? b.oldPrice - b.price : 0) - (a.oldPrice ? a.oldPrice - a.price : 0));
+                    sorted.sort((a, b) => (b.oldPrice ? b.oldPrice - b.basePrice : 0) - (a.oldPrice ? a.oldPrice - a.basePrice : 0));
                     break;
                 default:
                     break;
@@ -3503,9 +3579,9 @@
                         if (p) {
                             list.innerHTML += `
                                 <div style="display:flex; gap:1rem; margin-bottom:1.5rem; padding:1rem; background:var(--cream); border-radius:15px; align-items:center;">
-                                    <img src="${p.image}" style="width:80px; height:80px; object-fit:cover; border-radius:10px; cursor:pointer;" class="cart-item-clickable" onclick="(function(){ addToHistory(${p.id}); openProductModal(${p.id}); })()" alt="${p.name}" tabindex="0" role="button" aria-label="Открыть товар">
+                                    <img src="${p.image}" style="width:80px; height:80px; object-fit:cover; border-radius:10px; cursor:pointer;" class="cart-item-clickable" data-id="${p.id}" alt="${p.name}" tabindex="0" role="button" aria-label="Открыть товар">
                                     <div style="flex:1;">
-                                        <div><strong class="cart-item-clickable" onclick="(function(){ addToHistory(${p.id}); openProductModal(${p.id}); })()" tabindex="0" role="button" aria-label="Открыть товар">${p.name}</strong></div>
+                                        <div><strong class="cart-item-clickable" data-id="${p.id}" tabindex="0" role="button" aria-label="Открыть товар">${p.name}</strong></div>
                                         <div style="font-size:0.9rem; color:#666;">Цвет: ${p.color}</div>
                                         <div class="cart-size-selector">
                                             Размер: 
@@ -3513,7 +3589,7 @@
                                                 const id = ${p.id};
                                                 const oldSize = '${item.size}';
                                                 const newSize = select.value;
-                                                updateCartItemSize(id, oldSize, newSize);
+                                                window.updateCartItemSizeExternal(id, oldSize, newSize);
                                             })(this)" aria-label="Выберите размер">
                                                 ${SIZE_OPTIONS.map(opt => 
                                                     `<option value="${opt.value}" ${item.size === opt.value ? 'selected' : ''}>${opt.label}</option>`
@@ -3554,9 +3630,9 @@
                     if (p) {
                         list.innerHTML += `
                             <div style="display:flex; gap:1rem; margin-bottom:1.5rem; padding:1rem; background:var(--cream); border-radius:15px; align-items:center;">
-                                <img src="${p.image}" style="width:80px; height:80px; object-fit:cover; border-radius:10px; cursor:pointer;" onclick="(function(){ addToHistory(${p.id}); openProductModal(${p.id}); })()" alt="${p.name}" tabindex="0" role="button" aria-label="Открыть товар">
+                                <img src="${p.image}" style="width:80px; height:80px; object-fit:cover; border-radius:10px; cursor:pointer;" class="cart-item-clickable" data-id="${p.id}" alt="${p.name}" tabindex="0" role="button" aria-label="Открыть товар">
                                 <div style="flex:1;">
-                                    <div><strong>${p.name}</strong></div>
+                                    <div><strong class="cart-item-clickable" data-id="${p.id}" tabindex="0" role="button" aria-label="Открыть товар">${p.name}</strong></div>
                                     <div style="font-size:0.9rem; color:#666;">Цвет: ${p.color}</div>
                                     <div style="font-size:0.9rem; color:#666;">от ${p.basePrice.toLocaleString()} ₽</div>
                                     <div style="display:flex; gap:0.5rem; margin-top:0.5rem; flex-wrap:wrap;">
@@ -3905,6 +3981,7 @@
         // ============================================================================
 
         function initEventDelegation() {
+            // Обработчик клика по карточке товара
             document.getElementById('productGrid').addEventListener('click', (e) => {
                 const card = e.target.closest('.product-card');
                 if (!card) return;
@@ -3934,6 +4011,18 @@
 
                 addToHistory(id);
                 openProductModal(id);
+            });
+
+            // Глобальный обработчик для кликабельных элементов в корзине и избранном
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.cart-item-clickable')) {
+                    const element = e.target.closest('.cart-item-clickable');
+                    const id = parseInt(element.dataset.id);
+                    if (!isNaN(id)) {
+                        addToHistory(id);
+                        openProductModal(id);
+                    }
+                }
             });
 
             document.addEventListener('click', (e) => {
@@ -4655,6 +4744,11 @@
                 }
             });
         }
+
+        // Внешняя функция для обновления размера в корзине
+        window.updateCartItemSizeExternal = function(id, oldSize, newSize) {
+            updateCartItemSize(id, oldSize, newSize);
+        };
 
         // ============================================================================
         // 5. INIT - Инициализация
