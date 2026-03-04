@@ -197,7 +197,7 @@
             color: var(--charcoal);
             font-size: 1.5rem;
         }
-        /* Иконки справа - теперь это кнопки */
+        /* Иконки справа */
         .nav-icons {
             display: flex;
             gap: 1.5rem;
@@ -243,18 +243,46 @@
             min-width: 20px;
             text-align: center;
         }
-        /* Выпадающее меню пользователя */
+        /* Информация о пользователе в шапке */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            background: var(--cream);
+            padding: 0.3rem 1rem 0.3rem 0.5rem;
+            border-radius: 40px;
+            border: 1px solid var(--sand);
+        }
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--brick);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .user-name {
+            max-width: 100px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         .user-dropdown {
             position: relative;
         }
         .user-menu {
             position: absolute;
-            top: 40px;
+            top: 45px;
             right: 0;
             background: white;
             border: 1px solid var(--sand);
             border-radius: 20px;
-            width: 200px;
+            width: 220px;
             padding: 1rem 0;
             box-shadow: var(--shadow-md);
             opacity: 0;
@@ -269,7 +297,7 @@
             visibility: visible;
             transform: translateY(0);
         }
-        .user-menu button {
+        .user-menu button, .user-menu a {
             display: block;
             width: 100%;
             text-align: left;
@@ -282,7 +310,7 @@
             border: none;
             font-size: 1rem;
         }
-        .user-menu button:hover {
+        .user-menu button:hover, .user-menu a:hover {
             background: var(--cream);
             color: var(--brick);
         }
@@ -362,6 +390,13 @@
                 width: 22px;
                 height: 16px;
             }
+            .user-info {
+                padding: 0.2rem 0.5rem 0.2rem 0.2rem;
+                font-size: 0.8rem;
+            }
+            .user-name {
+                max-width: 60px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -394,6 +429,18 @@
                 flex-direction: column;
                 justify-content: center;
                 gap: 3px;
+            }
+            .user-info {
+                padding: 0.2rem 0.3rem 0.2rem 0.2rem;
+                font-size: 0.7rem;
+            }
+            .user-avatar {
+                width: 24px;
+                height: 24px;
+                font-size: 0.8rem;
+            }
+            .user-name {
+                max-width: 40px;
             }
         }
         
@@ -2243,6 +2290,314 @@
         button, .btn-primary, .btn-secondary, .category-tab, .filter-toggle, .product-icon {
             -webkit-tap-highlight-color: transparent;
         }
+        /* ========== СТИЛИ ДЛЯ ЛИЧНОГО КАБИНЕТА ========== */
+        .profile-section {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--sand);
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--brick);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        .profile-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+        .profile-info p {
+            color: #666;
+            margin-bottom: 0.2rem;
+        }
+        .profile-stats {
+            display: flex;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            text-align: center;
+            background: var(--cream);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            flex: 1;
+            min-width: 120px;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--brick);
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .profile-tabs {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--sand);
+            margin: 2rem 0 1.5rem;
+            flex-wrap: wrap;
+        }
+        .profile-tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .profile-tab.active {
+            color: var(--brick);
+            border-bottom-color: var(--brick);
+        }
+        .profile-tab:focus-visible {
+            outline: 3px solid var(--sage);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        .profile-content {
+            min-height: 200px;
+        }
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .order-card {
+            background: var(--cream);
+            border-radius: 15px;
+            padding: 1.2rem;
+            border: 1px solid var(--sand);
+        }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .order-number {
+            font-weight: 700;
+            color: var(--brick);
+        }
+        .order-status {
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .status-processing { background: #fff3cd; color: #856404; }
+        .status-shipped { background: #d1ecf1; color: #0c5460; }
+        .status-delivered { background: #d4edda; color: #155724; }
+        .status-cancelled { background: #f8d7da; color: #721c24; }
+        .order-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+        .order-total {
+            text-align: right;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px dashed var(--sand);
+        }
+        .order-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+        .order-actions button {
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+        }
+        .empty-orders {
+            text-align: center;
+            padding: 2rem;
+            background: var(--cream);
+            border-radius: 15px;
+            color: #666;
+        }
+        .empty-orders i {
+            font-size: 3rem;
+            color: var(--brick);
+            margin-bottom: 1rem;
+        }
+        .profile-settings {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .settings-group {
+            background: var(--cream);
+            padding: 1.5rem;
+            border-radius: 15px;
+        }
+        .settings-group h4 {
+            margin-bottom: 1rem;
+            color: var(--brick);
+        }
+        .settings-field {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .settings-label {
+            min-width: 100px;
+            font-weight: 600;
+        }
+        .settings-value {
+            flex: 1;
+            color: #666;
+        }
+        .settings-edit {
+            background: none;
+            border: 1px solid var(--sand);
+            border-radius: 30px;
+            padding: 0.3rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .settings-edit:hover {
+            background: var(--brick);
+            color: white;
+            border-color: var(--brick);
+        }
+        /* Формы авторизации */
+        .auth-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--sand);
+        }
+        .auth-tab {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+        }
+        .auth-tab.active {
+            color: var(--brick);
+            border-bottom-color: var(--brick);
+        }
+        .auth-tab:focus-visible {
+            outline: 3px solid var(--sage);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        .auth-form {
+            display: none;
+        }
+        .auth-form.active {
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--sand);
+            border-radius: 60px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus {
+            border-color: var(--brick);
+        }
+        .form-group input:focus-visible {
+            outline: 3px solid var(--sage);
+            outline-offset: 2px;
+        }
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .form-row .form-group {
+            flex: 1;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .checkbox-group input {
+            width: auto;
+        }
+        .auth-divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #aaa;
+        }
+        .social-auth {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .social-auth button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 1px solid var(--sand);
+            background: white;
+            font-size: 1.3rem;
+            color: var(--charcoal);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .social-auth button:hover {
+            background: var(--brick);
+            color: white;
+            border-color: var(--brick);
+            transform: translateY(-2px);
+        }
+        .social-auth button:focus-visible {
+            outline: 3px solid var(--sage);
+            outline-offset: 2px;
+        }
+        .logout-btn {
+            color: var(--error) !important;
+        }
         /* ========== АДАПТАЦИЯ КАРТОЧКИ ТОВАРА ДЛЯ ТЕЛЕФОНОВ ========== */
         @media (max-width: 600px) {
             .product-detail {
@@ -2275,6 +2630,27 @@
             }
             .size-selector select {
                 padding: 0.4rem;
+            }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-stats {
+                gap: 0.5rem;
+            }
+            .stat-item {
+                min-width: 80px;
+                padding: 0.8rem;
+            }
+            .stat-value {
+                font-size: 1.5rem;
+            }
+            .profile-tabs {
+                justify-content: center;
+            }
+            .profile-tab {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.9rem;
             }
         }
         /* Адаптация сетки для мобильных */
@@ -2377,6 +2753,18 @@
             .cart-size-selector select {
                 max-width: 100px;
             }
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .order-actions {
+                justify-content: flex-start;
+            }
+            .settings-field {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
+            }
         }
         /* Дополнительная адаптация для очень маленьких экранов */
         @media (max-width: 360px) {
@@ -2443,18 +2831,23 @@
             <i class="fas fa-shopping-cart" aria-hidden="true"></i>
             <span id="cartCount" class="cart-count">0</span>
         </button>
-        <div class="user-dropdown">
-            <button class="nav-icon-btn" id="userIcon" aria-label="Пользователь">
-                <i class="fas fa-user" aria-hidden="true"></i>
-            </button>
+        <div class="user-dropdown" id="userDropdownContainer">
+            <div class="user-info" id="userInfo">
+                <div class="user-avatar" id="userAvatar">Г</div>
+                <span class="user-name" id="userName">Гость</span>
+            </div>
             <div class="user-menu" id="userMenu">
-                <button class="user-menu-item" data-target="favorites">Избранное</button>
-                <button class="user-menu-item" data-target="cart">Корзина</button>
-                <hr>
-                <button class="user-menu-item" data-target="orders">Мои заказы</button>
-                <button class="user-menu-item" data-target="profile">Профиль</button>
-                <hr>
-                <button class="user-menu-item" data-target="auth">Вход / Регистрация</button>
+                <div id="userMenuAuth">
+                    <button class="user-menu-item" data-target="login">Вход</button>
+                    <button class="user-menu-item" data-target="register">Регистрация</button>
+                </div>
+                <div id="userMenuProfile" style="display:none;">
+                    <button class="user-menu-item" data-target="profile">Личный кабинет</button>
+                    <button class="user-menu-item" data-target="orders">Мои заказы</button>
+                    <button class="user-menu-item" data-target="favorites">Избранное</button>
+                    <hr>
+                    <button class="user-menu-item logout-btn" data-target="logout">Выйти</button>
+                </div>
             </div>
         </div>
     </div>
@@ -2640,7 +3033,7 @@
     </div>
 </section>
 
-<!-- ========== ДОСТАВКА (УБРАН САМОВЫВОЗ) ========== -->
+<!-- ========== ДОСТАВКА ========== -->
 <section id="delivery" class="delivery-section" style="padding:3rem 4%; background:white;">
     <div class="container">
         <h2 style="text-align:center; margin-bottom:2rem;">Доставка</h2>
@@ -2659,7 +3052,7 @@
     </div>
 </section>
 
-<!-- ========== КОНТАКТЫ (УБРАН АДРЕС) ========== -->
+<!-- ========== КОНТАКТЫ ========== -->
 <section id="contacts" class="contacts-section" style="padding:3rem 4%; background:var(--ivory);">
     <div style="display:flex; gap:2rem; max-width:1200px; margin:0 auto; flex-wrap:wrap;">
         <div style="flex:1 1 260px;">
@@ -2781,15 +3174,125 @@
     </div>
 </div>
 
+<!-- МОДАЛЬНОЕ ОКНО АВТОРИЗАЦИИ -->
 <div id="authModal" class="modal" role="dialog" aria-modal="true" aria-label="Авторизация">
     <div class="modal-content">
         <button class="modal-close" id="closeAuth" aria-label="Закрыть">&times;</button>
         <h2>Вход / Регистрация</h2>
-        <form id="authForm">
-            <input type="email" placeholder="Email" required style="width:100%; padding:0.8rem; margin:0.8rem 0; border:1px solid var(--sand); border-radius:60px;">
-            <input type="password" placeholder="Пароль" required style="width:100%; padding:0.8rem; margin:0.8rem 0; border:1px solid var(--sand); border-radius:60px;">
-            <button type="submit" class="btn-primary" style="width:100%;">Войти</button>
-        </form>
+        
+        <div class="auth-tabs">
+            <button class="auth-tab active" data-auth-tab="login">Вход</button>
+            <button class="auth-tab" data-auth-tab="register">Регистрация</button>
+        </div>
+        
+        <!-- Форма входа -->
+        <div class="auth-form active" id="loginForm">
+            <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" placeholder="Ваш email" required>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Пароль</label>
+                <input type="password" id="loginPassword" placeholder="Ваш пароль" required>
+            </div>
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="rememberMe">
+                <label for="rememberMe">Запомнить меня</label>
+            </div>
+            <button class="btn-primary" style="width:100%;" id="loginBtn">Войти</button>
+        </div>
+        
+        <!-- Форма регистрации -->
+        <div class="auth-form" id="registerForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="registerFirstName">Имя</label>
+                    <input type="text" id="registerFirstName" placeholder="Имя" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerLastName">Фамилия</label>
+                    <input type="text" id="registerLastName" placeholder="Фамилия" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="registerEmail">Email</label>
+                <input type="email" id="registerEmail" placeholder="Ваш email" required>
+            </div>
+            <div class="form-group">
+                <label for="registerPhone">Телефон</label>
+                <input type="tel" id="registerPhone" placeholder="+7 (___) ___-__-__" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="registerPassword">Пароль</label>
+                    <input type="password" id="registerPassword" placeholder="Придумайте пароль" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Подтверждение</label>
+                    <input type="password" id="registerConfirmPassword" placeholder="Повторите пароль" required>
+                </div>
+            </div>
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="agreeTerms" checked>
+                <label for="agreeTerms">Я согласен с условиями обработки персональных данных</label>
+            </div>
+            <button class="btn-primary" style="width:100%;" id="registerBtn">Зарегистрироваться</button>
+        </div>
+        
+        <div class="auth-divider">или</div>
+        
+        <div class="social-auth">
+            <button aria-label="ВКонтакте"><i class="fab fa-vk"></i></button>
+            <button aria-label="Google"><i class="fab fa-google"></i></button>
+            <button aria-label="Telegram"><i class="fab fa-telegram"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО ЛИЧНОГО КАБИНЕТА -->
+<div id="profileModal" class="modal" role="dialog" aria-modal="true" aria-label="Личный кабинет">
+    <div class="modal-content">
+        <button class="modal-close" id="closeProfile" aria-label="Закрыть">&times;</button>
+        
+        <div id="profileContent">
+            <h2>Личный кабинет</h2>
+            
+            <div class="profile-section">
+                <div class="profile-header">
+                    <div class="profile-avatar" id="profileAvatar">А</div>
+                    <div class="profile-info">
+                        <h3 id="profileFullName">Амир Аблаев</h3>
+                        <p id="profileEmail">amir@avvacarpets.ru</p>
+                        <p id="profilePhone">+7 (925) 311-88-84</p>
+                    </div>
+                </div>
+                
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="profileOrdersCount">3</div>
+                        <div class="stat-label">Заказов</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="profileFavoritesCount">5</div>
+                        <div class="stat-label">В избранном</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="profileSpent">45 900 ₽</div>
+                        <div class="stat-label">Потрачено</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-tabs">
+                <button class="profile-tab active" data-profile-tab="orders">Мои заказы</button>
+                <button class="profile-tab" data-profile-tab="settings">Настройки</button>
+                <button class="profile-tab" data-profile-tab="favorites">Избранное</button>
+            </div>
+            
+            <div class="profile-content" id="profileTabContent">
+                <!-- Содержимое будет заполняться динамически -->
+            </div>
+        </div>
     </div>
 </div>
 
@@ -2864,7 +3367,7 @@
             { value: '3x4', label: '3x4 м' }
         ];
         
-        // Генерация товаров (100% рабочие фото с Pexels)
+        // Генерация товаров
         const categories = ['living', 'bedroom', 'children', 'hallway'];
         const materials = ['Шерсть', 'Хлопок', 'Шёлк', 'Смесовый'];
         const colors = ['терракота', 'шалфей', 'глина', 'графит', 'песок'];
@@ -2935,6 +3438,544 @@
             { id: 4, title: 'Ковры из натуральной шерсти: плюсы и минусы', author: 'Халил', excerpt: 'Разбираем все преимущества и недостатки шерстяных ковров.', content: '<p>Шерстяные ковры — классика. Плюсы: они тёплые, упругие, отлично держат форму, не накапливают статическое электричество, гипоаллергенны (если у вас нет аллергии на ланолин). Минусы: высокая цена, чувствительность к влаге, могут привлекать моль.</p><p>Уход за шерстью требует аккуратности: используйте только сухую чистку или специальные средства. Зато такой ковёр прослужит десятилетия.</p>', image: 'https://images.pexels.com/photos/5094839/pexels-photo-5094839.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2' }
         ];
 
+        // ============================================================================
+        // 2. СИСТЕМА АВТОРИЗАЦИИ
+        // ============================================================================
+        
+        // Ключи для localStorage
+        const STORAGE_KEYS = {
+            USERS: 'avva_users',
+            CURRENT_USER: 'avva_current_user',
+            CART: 'avva_cart',
+            FAVORITES: 'avva_favorites',
+            HISTORY: 'avva_history',
+            SEARCH_HISTORY: 'avva_search_history',
+            ORDERS: 'avva_orders'
+        };
+
+        // Класс для работы с пользователями
+        class UserManager {
+            constructor() {
+                this.users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS)) || [];
+                this.currentUser = JSON.parse(localStorage.getItem(STORAGE_KEYS.CURRENT_USER)) || null;
+                this.orders = JSON.parse(localStorage.getItem(STORAGE_KEYS.ORDERS)) || {};
+                
+                // Если есть тестовые пользователи, добавляем их
+                if (this.users.length === 0) {
+                    this.users.push({
+                        id: 'user_1',
+                        email: 'demo@avva.ru',
+                        password: 'demo123',
+                        firstName: 'Демо',
+                        lastName: 'Пользователь',
+                        phone: '+7 (999) 123-45-67',
+                        registeredAt: new Date().toISOString(),
+                        avatar: 'Д'
+                    });
+                    this.saveUsers();
+                }
+            }
+
+            saveUsers() {
+                localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(this.users));
+            }
+
+            saveCurrentUser() {
+                if (this.currentUser) {
+                    localStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(this.currentUser));
+                } else {
+                    localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
+                }
+            }
+
+            saveOrders() {
+                localStorage.setItem(STORAGE_KEYS.ORDERS, JSON.stringify(this.orders));
+            }
+
+            // Регистрация нового пользователя
+            register(userData) {
+                // Проверяем, не занят ли email
+                if (this.users.some(u => u.email === userData.email)) {
+                    return { success: false, error: 'Пользователь с таким email уже существует' };
+                }
+
+                // Проверка пароля
+                if (userData.password.length < 6) {
+                    return { success: false, error: 'Пароль должен быть не менее 6 символов' };
+                }
+
+                const newUser = {
+                    id: 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+                    email: userData.email,
+                    password: userData.password,
+                    firstName: userData.firstName || '',
+                    lastName: userData.lastName || '',
+                    phone: userData.phone || '',
+                    registeredAt: new Date().toISOString(),
+                    avatar: (userData.firstName || 'П').charAt(0).toUpperCase()
+                };
+
+                this.users.push(newUser);
+                this.saveUsers();
+
+                // Создаем пустые данные для пользователя
+                this.orders[newUser.id] = [];
+                this.saveOrders();
+
+                return { success: true, user: newUser };
+            }
+
+            // Вход пользователя
+            login(email, password, remember = false) {
+                const user = this.users.find(u => u.email === email && u.password === password);
+                
+                if (!user) {
+                    return { success: false, error: 'Неверный email или пароль' };
+                }
+
+                // Копируем пользователя без пароля для сессии
+                const sessionUser = { ...user };
+                delete sessionUser.password;
+
+                this.currentUser = sessionUser;
+                
+                if (remember) {
+                    this.saveCurrentUser();
+                } else {
+                    sessionStorage.setItem(STORAGE_KEYS.CURRENT_USER, JSON.stringify(sessionUser));
+                }
+
+                return { success: true, user: sessionUser };
+            }
+
+            // Выход пользователя
+            logout() {
+                this.currentUser = null;
+                localStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
+                sessionStorage.removeItem(STORAGE_KEYS.CURRENT_USER);
+            }
+
+            // Получение текущего пользователя
+            getCurrentUser() {
+                if (this.currentUser) return this.currentUser;
+                
+                // Проверяем sessionStorage
+                const sessionUser = sessionStorage.getItem(STORAGE_KEYS.CURRENT_USER);
+                if (sessionUser) {
+                    this.currentUser = JSON.parse(sessionUser);
+                    return this.currentUser;
+                }
+                
+                return null;
+            }
+
+            // Обновление профиля
+            updateProfile(userId, updates) {
+                const userIndex = this.users.findIndex(u => u.id === userId);
+                if (userIndex === -1) return { success: false, error: 'Пользователь не найден' };
+
+                // Обновляем в основном массиве
+                this.users[userIndex] = { ...this.users[userIndex], ...updates };
+                this.saveUsers();
+
+                // Обновляем текущую сессию
+                if (this.currentUser && this.currentUser.id === userId) {
+                    this.currentUser = { ...this.currentUser, ...updates };
+                    this.saveCurrentUser();
+                }
+
+                return { success: true, user: this.users[userIndex] };
+            }
+
+            // Получение заказов пользователя
+            getUserOrders(userId) {
+                return this.orders[userId] || [];
+            }
+
+            // Добавление заказа
+            addOrder(userId, orderData) {
+                if (!this.orders[userId]) {
+                    this.orders[userId] = [];
+                }
+
+                const newOrder = {
+                    id: 'order_' + Date.now(),
+                    ...orderData,
+                    createdAt: new Date().toISOString(),
+                    status: 'processing'
+                };
+
+                this.orders[userId].push(newOrder);
+                this.saveOrders();
+
+                return newOrder;
+            }
+
+            // Обновление статуса заказа
+            updateOrderStatus(userId, orderId, status) {
+                const userOrders = this.orders[userId];
+                if (!userOrders) return false;
+
+                const order = userOrders.find(o => o.id === orderId);
+                if (order) {
+                    order.status = status;
+                    this.saveOrders();
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        // Создаем экземпляр менеджера пользователей
+        const userManager = new UserManager();
+
+        // ============================================================================
+        // 3. УПРАВЛЕНИЕ ДАННЫМИ ПОЛЬЗОВАТЕЛЯ
+        // ============================================================================
+
+        // Получение ключа для данных пользователя
+        function getUserDataKey(baseKey) {
+            const user = userManager.getCurrentUser();
+            return user ? `${baseKey}_${user.id}` : baseKey;
+        }
+
+        // Загрузка данных пользователя
+        function loadUserData() {
+            const user = userManager.getCurrentUser();
+            
+            if (user) {
+                // Загружаем данные конкретного пользователя
+                AppState.cart = JSON.parse(localStorage.getItem(getUserDataKey(STORAGE_KEYS.CART))) || [];
+                AppState.favorites = JSON.parse(localStorage.getItem(getUserDataKey(STORAGE_KEYS.FAVORITES))) || [];
+                AppState.history = JSON.parse(localStorage.getItem(getUserDataKey(STORAGE_KEYS.HISTORY))) || [];
+                AppState.searchHistory = JSON.parse(localStorage.getItem(getUserDataKey(STORAGE_KEYS.SEARCH_HISTORY))) || [];
+            } else {
+                // Загружаем гостевые данные
+                AppState.cart = JSON.parse(localStorage.getItem(STORAGE_KEYS.CART)) || [];
+                AppState.favorites = JSON.parse(localStorage.getItem(STORAGE_KEYS.FAVORITES)) || [];
+                AppState.history = JSON.parse(localStorage.getItem(STORAGE_KEYS.HISTORY)) || [];
+                AppState.searchHistory = JSON.parse(localStorage.getItem(STORAGE_KEYS.SEARCH_HISTORY)) || [];
+            }
+        }
+
+        // Сохранение данных пользователя
+        function saveUserData() {
+            const user = userManager.getCurrentUser();
+            
+            if (user) {
+                localStorage.setItem(getUserDataKey(STORAGE_KEYS.CART), JSON.stringify(AppState.cart));
+                localStorage.setItem(getUserDataKey(STORAGE_KEYS.FAVORITES), JSON.stringify(AppState.favorites));
+                localStorage.setItem(getUserDataKey(STORAGE_KEYS.HISTORY), JSON.stringify(AppState.history));
+                localStorage.setItem(getUserDataKey(STORAGE_KEYS.SEARCH_HISTORY), JSON.stringify(AppState.searchHistory));
+            } else {
+                localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(AppState.cart));
+                localStorage.setItem(STORAGE_KEYS.FAVORITES, JSON.stringify(AppState.favorites));
+                localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(AppState.history));
+                localStorage.setItem(STORAGE_KEYS.SEARCH_HISTORY, JSON.stringify(AppState.searchHistory));
+            }
+        }
+
+        // Обновление интерфейса в зависимости от статуса авторизации
+        function updateAuthUI() {
+            const user = userManager.getCurrentUser();
+            const authMenu = document.getElementById('userMenuAuth');
+            const profileMenu = document.getElementById('userMenuProfile');
+            const userName = document.getElementById('userName');
+            const userAvatar = document.getElementById('userAvatar');
+
+            if (user) {
+                // Пользователь авторизован
+                authMenu.style.display = 'none';
+                profileMenu.style.display = 'block';
+                userName.textContent = `${user.firstName || 'Пользователь'}`;
+                userAvatar.textContent = user.avatar || (user.firstName ? user.firstName.charAt(0).toUpperCase() : 'П');
+                
+                // Загружаем данные пользователя
+                loadUserData();
+                
+                // Обновляем счетчики
+                updateBadges();
+                updateCartDisplay();
+                updateFavoritesDisplay();
+                renderAllHistory();
+            } else {
+                // Гость
+                authMenu.style.display = 'block';
+                profileMenu.style.display = 'none';
+                userName.textContent = 'Гость';
+                userAvatar.textContent = 'Г';
+                
+                // Загружаем гостевые данные
+                loadUserData();
+                
+                // Обновляем счетчики
+                updateBadges();
+                updateCartDisplay();
+                updateFavoritesDisplay();
+                renderAllHistory();
+            }
+        }
+
+        // Генерация тестовых заказов для демо
+        function generateDemoOrders(userId) {
+            const orders = userManager.getUserOrders(userId);
+            
+            if (orders.length === 0 && userId === 'user_1') {
+                // Создаем тестовые заказы
+                const now = new Date();
+                const pastDate = new Date(now);
+                pastDate.setDate(pastDate.getDate() - 15);
+                
+                userManager.addOrder(userId, {
+                    items: [
+                        { productId: 1, name: 'Ковёр "Марокко"', quantity: 1, price: 8900, size: '2x3' },
+                        { productId: 5, name: 'Ковёр "Бохо"', quantity: 1, price: 12500, size: '2.5x3.5' }
+                    ],
+                    total: 21400,
+                    address: 'г. Москва, ул. Тверская, д. 10, кв. 45',
+                    paymentMethod: 'card',
+                    deliveryMethod: 'courier',
+                    createdAt: pastDate.toISOString(),
+                    status: 'delivered'
+                });
+
+                const recentDate = new Date(now);
+                recentDate.setDate(recentDate.getDate() - 3);
+                
+                userManager.addOrder(userId, {
+                    items: [
+                        { productId: 12, name: 'Ковёр "Милан"', quantity: 1, price: 15600, size: '3x4' }
+                    ],
+                    total: 15600,
+                    address: 'г. Москва, ул. Тверская, д. 10, кв. 45',
+                    paymentMethod: 'card',
+                    deliveryMethod: 'courier',
+                    createdAt: recentDate.toISOString(),
+                    status: 'shipped'
+                });
+
+                const todayOrder = {
+                    items: [
+                        { productId: 8, name: 'Ковёр "Сафари"', quantity: 1, price: 8900, size: '2x3' }
+                    ],
+                    total: 8900,
+                    address: 'г. Москва, ул. Тверская, д. 10, кв. 45',
+                    paymentMethod: 'cash',
+                    deliveryMethod: 'courier',
+                    createdAt: now.toISOString(),
+                    status: 'processing'
+                };
+
+                userManager.addOrder(userId, todayOrder);
+            }
+        }
+
+        // Форматирование даты
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+
+        // Получение статуса заказа на русском
+        function getOrderStatusText(status) {
+            const statuses = {
+                'processing': 'В обработке',
+                'shipped': 'Отправлен',
+                'delivered': 'Доставлен',
+                'cancelled': 'Отменён'
+            };
+            return statuses[status] || status;
+        }
+
+        // Получение класса для статуса
+        function getOrderStatusClass(status) {
+            const classes = {
+                'processing': 'status-processing',
+                'shipped': 'status-shipped',
+                'delivered': 'status-delivered',
+                'cancelled': 'status-cancelled'
+            };
+            return classes[status] || 'status-processing';
+        }
+
+        // Рендер заказов в личном кабинете
+        function renderUserOrders() {
+            const user = userManager.getCurrentUser();
+            if (!user) return '';
+
+            const orders = userManager.getUserOrders(user.id);
+            
+            if (orders.length === 0) {
+                return `
+                    <div class="empty-orders">
+                        <i class="fas fa-box-open"></i>
+                        <h3>У вас пока нет заказов</h3>
+                        <p>Перейдите в каталог, чтобы выбрать ковёр</p>
+                        <button class="btn-primary" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'}); closeModal('profileModal');">В каталог</button>
+                    </div>
+                `;
+            }
+
+            let totalSpent = 0;
+            let ordersHtml = '<div class="orders-list">';
+
+            orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).forEach(order => {
+                totalSpent += order.total;
+
+                ordersHtml += `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <span class="order-number">Заказ #${order.id.slice(-8)}</span>
+                            <span class="order-status ${getOrderStatusClass(order.status)}">${getOrderStatusText(order.status)}</span>
+                        </div>
+                        <div class="order-items">
+                `;
+
+                order.items.forEach(item => {
+                    ordersHtml += `
+                        <div class="order-item">
+                            <span>${item.name} (${item.size}) x ${item.quantity}</span>
+                            <span>${(item.price * item.quantity).toLocaleString()} ₽</span>
+                        </div>
+                    `;
+                });
+
+                ordersHtml += `
+                        </div>
+                        <div class="order-total">
+                            Итого: <strong>${order.total.toLocaleString()} ₽</strong>
+                        </div>
+                        <div style="font-size:0.8rem; color:#666; margin-top:0.5rem;">
+                            Дата: ${formatDate(order.createdAt)}
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn-secondary" onclick="alert('Повтор заказа: ${order.id}')">Повторить</button>
+                            <button class="btn-secondary" onclick="alert('Детали заказа: ${order.id}')">Подробнее</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            ordersHtml += '</div>';
+
+            // Обновляем статистику
+            setTimeout(() => {
+                document.getElementById('profileOrdersCount').textContent = orders.length;
+                document.getElementById('profileSpent').textContent = totalSpent.toLocaleString() + ' ₽';
+                document.getElementById('profileFavoritesCount').textContent = AppState.favorites.length;
+            }, 0);
+
+            return ordersHtml;
+        }
+
+        // Рендер настроек профиля
+        function renderProfileSettings() {
+            const user = userManager.getCurrentUser();
+            if (!user) return '';
+
+            return `
+                <div class="profile-settings">
+                    <div class="settings-group">
+                        <h4>Личные данные</h4>
+                        <div class="settings-field">
+                            <span class="settings-label">Имя:</span>
+                            <span class="settings-value" id="profileFirstName">${user.firstName || 'Не указано'}</span>
+                            <button class="settings-edit" onclick="editProfileField('firstName')">Изменить</button>
+                        </div>
+                        <div class="settings-field">
+                            <span class="settings-label">Фамилия:</span>
+                            <span class="settings-value" id="profileLastName">${user.lastName || 'Не указано'}</span>
+                            <button class="settings-edit" onclick="editProfileField('lastName')">Изменить</button>
+                        </div>
+                        <div class="settings-field">
+                            <span class="settings-label">Email:</span>
+                            <span class="settings-value" id="profileEmail">${user.email}</span>
+                            <button class="settings-edit" onclick="editProfileField('email')">Изменить</button>
+                        </div>
+                        <div class="settings-field">
+                            <span class="settings-label">Телефон:</span>
+                            <span class="settings-value" id="profilePhone">${user.phone || 'Не указан'}</span>
+                            <button class="settings-edit" onclick="editProfileField('phone')">Изменить</button>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-group">
+                        <h4>Безопасность</h4>
+                        <div class="settings-field">
+                            <span class="settings-label">Пароль:</span>
+                            <span class="settings-value">••••••••</span>
+                            <button class="settings-edit" onclick="editProfileField('password')">Сменить</button>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-group">
+                        <h4>Адреса доставки</h4>
+                        <div class="settings-field">
+                            <span class="settings-value">г. Москва, ул. Тверская, д. 10, кв. 45</span>
+                            <button class="settings-edit" onclick="editProfileField('address')">Изменить</button>
+                        </div>
+                        <button class="btn-secondary" style="margin-top:0.5rem;">+ Добавить адрес</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Рендер избранного в личном кабинете
+        function renderProfileFavorites() {
+            if (AppState.favorites.length === 0) {
+                return `
+                    <div class="empty-orders">
+                        <i class="fas fa-heart"></i>
+                        <h3>В избранном пока пусто</h3>
+                        <p>Добавляйте понравившиеся товары в избранное</p>
+                        <button class="btn-primary" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'}); closeModal('profileModal');">В каталог</button>
+                    </div>
+                `;
+            }
+
+            let html = '<div style="display:grid; gap:1rem;">';
+            
+            AppState.favorites.forEach(id => {
+                const p = products.find(pr => pr.id === id);
+                if (p) {
+                    html += `
+                        <div style="display:flex; gap:1rem; align-items:center; background:var(--cream); padding:1rem; border-radius:15px;">
+                            <img src="${p.image}" style="width:80px; height:80px; object-fit:cover; border-radius:10px; cursor:pointer;" onclick="addToHistory(${p.id}); openProductModal(${p.id}); closeModal('profileModal');">
+                            <div style="flex:1;">
+                                <div><strong>${p.name}</strong></div>
+                                <div style="font-size:0.9rem; color:#666;">${p.color}, ${p.material}</div>
+                                <div style="font-weight:700; color:var(--brick); margin-top:0.3rem;">от ${p.basePrice.toLocaleString()} ₽</div>
+                            </div>
+                            <div style="display:flex; gap:0.5rem;">
+                                <button class="btn-primary" style="padding:0.5rem 1rem;" onclick="addToCart(${p.id}, '2x3'); toggleFavorite(${p.id});">В корзину</button>
+                                <button class="btn-secondary" style="padding:0.5rem 1rem;" onclick="toggleFavorite(${p.id}); renderProfileFavoritesInTab();">Удалить</button>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            
+            html += '</div>';
+            return html;
+        }
+
+        // Обновление вкладки в личном кабинете
+        function updateProfileTab(tab) {
+            const content = document.getElementById('profileTabContent');
+            
+            if (tab === 'orders') {
+                content.innerHTML = renderUserOrders();
+            } else if (tab === 'settings') {
+                content.innerHTML = renderProfileSettings();
+            } else if (tab === 'favorites') {
+                content.innerHTML = renderProfileFavorites();
+            }
+        }
+
+        // ============================================================================
+        // 4. CORE FUNCTIONS - Ядро логики (остаётся без изменений)
+        // ============================================================================
+
         // Состояние приложения
         const AppState = {
             currentCategory: 'all',
@@ -2947,34 +3988,33 @@
             maxPrice: 100000,
             currentPage: 1,
             itemsPerPage: 12,
-            cart: JSON.parse(localStorage.getItem('avva_cart')) || [],
-            favorites: JSON.parse(localStorage.getItem('avva_favorites')) || [],
-            history: JSON.parse(localStorage.getItem('avva_history')) || [],
-            searchHistory: JSON.parse(localStorage.getItem('avva_search_history')) || [],
+            cart: [],
+            favorites: [],
+            history: [],
+            searchHistory: [],
             historyScrollPosition: 0,
             lastFocusedElement: null,
             searchDebounceTimer: null
         };
 
-        // ============================================================================
-        // 2. CORE FUNCTIONS - Ядро логики
-        // ============================================================================
+        // Загружаем данные
+        loadUserData();
 
-        // Сохранение в localStorage
+        // Сохранение данных (переопределяем стандартные функции)
         function saveCart() {
-            localStorage.setItem('avva_cart', JSON.stringify(AppState.cart));
+            saveUserData();
         }
 
         function saveFavorites() {
-            localStorage.setItem('avva_favorites', JSON.stringify(AppState.favorites));
+            saveUserData();
         }
 
         function saveHistory() {
-            localStorage.setItem('avva_history', JSON.stringify(AppState.history));
+            saveUserData();
         }
 
         function saveSearchHistory() {
-            localStorage.setItem('avva_search_history', JSON.stringify(AppState.searchHistory));
+            saveUserData();
         }
 
         // Уведомления
@@ -3357,7 +4397,7 @@
         }
 
         // ============================================================================
-        // 3. RENDER FUNCTIONS - Отрисовка интерфейса
+        // 5. RENDER FUNCTIONS - Отрисовка интерфейса
         // ============================================================================
 
         function updateFilterCounts() {
@@ -3977,7 +5017,7 @@
         }
 
         // ============================================================================
-        // 4. EVENT HANDLERS - Обработчики событий (ДЕЛЕГИРОВАНИЕ!)
+        // 6. EVENT HANDLERS - Обработчики событий
         // ============================================================================
 
         function initEventDelegation() {
@@ -4090,7 +5130,7 @@
 
                     if (!p.reviews) p.reviews = [];
                     p.reviews.push({
-                        author: 'Гость',
+                        author: userManager.getCurrentUser()?.firstName || 'Гость',
                         rating: rating,
                         text: text,
                         date: new Date().toLocaleDateString('ru-RU')
@@ -4131,26 +5171,130 @@
                     }
                 }
 
+                // Обработчики для авторизации
                 if (e.target.classList.contains('user-menu-item')) {
                     const target = e.target.dataset.target;
                     document.getElementById('userMenu').classList.remove('active');
-                    if (target === 'favorites') {
-                        updateFavoritesDisplay();
-                        openModal('favoritesModal');
-                    } else if (target === 'cart') {
-                        updateCartDisplay();
-                        openModal('cartModal');
-                    } else if (target === 'orders') {
-                        alert('Функция "Мои заказы" будет доступна после авторизации');
-                    } else if (target === 'profile') {
-                        alert('Функция "Профиль" будет доступна после авторизации');
-                    } else if (target === 'auth') {
+                    
+                    if (target === 'login') {
+                        document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                        document.querySelector('[data-auth-tab="login"]').classList.add('active');
+                        document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+                        document.getElementById('loginForm').classList.add('active');
                         openModal('authModal');
+                    } else if (target === 'register') {
+                        document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                        document.querySelector('[data-auth-tab="register"]').classList.add('active');
+                        document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+                        document.getElementById('registerForm').classList.add('active');
+                        openModal('authModal');
+                    } else if (target === 'profile') {
+                        updateProfileTab('orders');
+                        openModal('profileModal');
+                    } else if (target === 'orders') {
+                        updateProfileTab('orders');
+                        openModal('profileModal');
+                    } else if (target === 'favorites') {
+                        if (userManager.getCurrentUser()) {
+                            updateProfileTab('favorites');
+                            openModal('profileModal');
+                        } else {
+                            openModal('authModal');
+                        }
+                    } else if (target === 'logout') {
+                        userManager.logout();
+                        updateAuthUI();
+                        showNotification('Вы вышли из системы');
                     }
                 }
 
-                if (e.target.classList.contains('footer-category')) {
-                    const cat = e.target.dataset.category;
+                if (e.target.closest('.auth-tab')) {
+                    const tab = e.target.closest('.auth-tab').dataset.authTab;
+                    document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                    e.target.closest('.auth-tab').classList.add('active');
+                    document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+                    document.getElementById(tab === 'login' ? 'loginForm' : 'registerForm').classList.add('active');
+                }
+
+                if (e.target.id === 'loginBtn') {
+                    e.preventDefault();
+                    const email = document.getElementById('loginEmail').value;
+                    const password = document.getElementById('loginPassword').value;
+                    const remember = document.getElementById('rememberMe').checked;
+
+                    if (!email || !password) {
+                        showNotification('Заполните все поля', 'error');
+                        return;
+                    }
+
+                    const result = userManager.login(email, password, remember);
+                    
+                    if (result.success) {
+                        closeModal('authModal');
+                        updateAuthUI();
+                        showNotification('Добро пожаловать!', 'success');
+                        
+                        // Генерируем тестовые заказы для демо-пользователя
+                        if (email === 'demo@avva.ru') {
+                            generateDemoOrders(result.user.id);
+                        }
+                    } else {
+                        showNotification(result.error, 'error');
+                    }
+                }
+
+                if (e.target.id === 'registerBtn') {
+                    e.preventDefault();
+                    
+                    const firstName = document.getElementById('registerFirstName').value;
+                    const lastName = document.getElementById('registerLastName').value;
+                    const email = document.getElementById('registerEmail').value;
+                    const phone = document.getElementById('registerPhone').value;
+                    const password = document.getElementById('registerPassword').value;
+                    const confirmPassword = document.getElementById('registerConfirmPassword').value;
+
+                    if (!firstName || !lastName || !email || !phone || !password) {
+                        showNotification('Заполните все поля', 'error');
+                        return;
+                    }
+
+                    if (password !== confirmPassword) {
+                        showNotification('Пароли не совпадают', 'error');
+                        return;
+                    }
+
+                    if (password.length < 6) {
+                        showNotification('Пароль должен быть не менее 6 символов', 'error');
+                        return;
+                    }
+
+                    const result = userManager.register({
+                        firstName,
+                        lastName,
+                        email,
+                        phone,
+                        password
+                    });
+
+                    if (result.success) {
+                        userManager.login(email, password, true);
+                        closeModal('authModal');
+                        updateAuthUI();
+                        showNotification('Регистрация успешна!', 'success');
+                    } else {
+                        showNotification(result.error, 'error');
+                    }
+                }
+
+                if (e.target.closest('.profile-tab')) {
+                    const tab = e.target.closest('.profile-tab').dataset.profileTab;
+                    document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+                    e.target.closest('.profile-tab').classList.add('active');
+                    updateProfileTab(tab);
+                }
+
+                if (e.target.closest('.footer-category')) {
+                    const cat = e.target.closest('.footer-category').dataset.category;
                     document.querySelectorAll('.category-tab').forEach(t => {
                         t.classList.remove('active');
                         if (t.dataset.category === cat) t.classList.add('active');
@@ -4535,16 +5679,20 @@
             });
 
             document.getElementById('favoritesIcon').addEventListener('click', () => {
-                updateFavoritesDisplay();
-                openModal('favoritesModal');
+                if (userManager.getCurrentUser()) {
+                    updateFavoritesDisplay();
+                    openModal('favoritesModal');
+                } else {
+                    openModal('authModal');
+                }
             });
 
-            document.getElementById('userIcon').addEventListener('click', (e) => {
+            document.getElementById('userInfo').addEventListener('click', (e) => {
                 e.stopPropagation();
                 document.getElementById('userMenu').classList.toggle('active');
             });
 
-            document.querySelectorAll('.modal-close, #closeCart, #closeFavorites, #closeProduct, #closeBlog, #closeAuth, #closePayment, #closeReturn, #closePrivacy').forEach(btn => {
+            document.querySelectorAll('.modal-close, #closeCart, #closeFavorites, #closeProduct, #closeBlog, #closeAuth, #closeProfile, #closePayment, #closeReturn, #closePrivacy').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const modal = e.target.closest('.modal');
                     if (modal) closeModal(modal.id);
@@ -4563,11 +5711,41 @@
                     alert('Корзина пуста');
                     return;
                 }
-                alert('Спасибо за заказ! Мы свяжемся с вами.');
+
+                const user = userManager.getCurrentUser();
+                
+                if (!user) {
+                    alert('Для оформления заказа необходимо войти в систему');
+                    openModal('authModal');
+                    return;
+                }
+
+                // Создаем заказ
+                const orderItems = AppState.cart.map(item => ({
+                    productId: item.id,
+                    name: item.name,
+                    quantity: item.quantity,
+                    price: item.price,
+                    size: item.size
+                }));
+
+                const total = AppState.cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+
+                userManager.addOrder(user.id, {
+                    items: orderItems,
+                    total: total,
+                    address: 'г. Москва, ул. Тверская, д. 10, кв. 45', // В реальном проекте брать из профиля
+                    paymentMethod: 'card',
+                    deliveryMethod: 'courier',
+                    createdAt: new Date().toISOString()
+                });
+
+                // Очищаем корзину
                 AppState.cart = [];
                 saveCart();
                 updateCartDisplay();
                 closeModal('cartModal');
+                showNotification('Заказ оформлен! Мы свяжемся с вами.', 'success');
             });
 
             document.getElementById('newsletterForm').addEventListener('submit', (e) => {
@@ -4750,8 +5928,21 @@
             updateCartItemSize(id, oldSize, newSize);
         };
 
+        // Внешние функции для редактирования профиля
+        window.editProfileField = function(field) {
+            alert(`Функция редактирования ${field} будет доступна в ближайшее время`);
+        };
+
+        // Внешняя функция для обновления избранного в личном кабинете
+        window.renderProfileFavoritesInTab = function() {
+            const activeTab = document.querySelector('.profile-tab.active');
+            if (activeTab && activeTab.dataset.profileTab === 'favorites') {
+                updateProfileTab('favorites');
+            }
+        };
+
         // ============================================================================
-        // 5. INIT - Инициализация
+        // 7. INIT - Инициализация
         // ============================================================================
 
         function init() {
@@ -4763,6 +5954,7 @@
             renderAllHistory();
             renderBlog();
             renderSearchHistory();
+            updateAuthUI();
 
             initEventDelegation();
 
