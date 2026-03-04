@@ -780,8 +780,7 @@
         .product-title:hover {
             color: var(--brick);
         }
-        .product-material,
-        .product-season {
+        .product-material {
             font-size: 0.8rem;
             color: #8a8a8a;
         }
@@ -1246,6 +1245,12 @@
             .category-tabs {
                 justify-content: center;
             }
+            .category-tab {
+                flex: 1;
+                text-align: center;
+                padding: 0.6rem 0.5rem;
+                font-size: 0.8rem;
+            }
             .search-sort {
                 flex-direction: column;
             }
@@ -1346,12 +1351,6 @@
         <label class="filter-option"><input type="checkbox" class="filter-material" value="Смесовый"> <span>Смесовый <span class="filter-count" id="mat-mix">(0)</span></span></label>
     </div>
     <div class="filter-group">
-        <h4>Сезон</h4>
-        <label class="filter-option"><input type="checkbox" class="filter-season" value="Зимний"> <span>Зимний <span class="filter-count" id="sea-winter">(0)</span></span></label>
-        <label class="filter-option"><input type="checkbox" class="filter-season" value="Летний"> <span>Летний <span class="filter-count" id="sea-summer">(0)</span></span></label>
-        <label class="filter-option"><input type="checkbox" class="filter-season" value="Всесезонный"> <span>Всесезонный <span class="filter-count" id="sea-all">(0)</span></span></label>
-    </div>
-    <div class="filter-group">
         <h4>Цвет</h4>
         <label class="filter-option"><input type="checkbox" class="filter-color" value="терракота"> <span class="color-dot" style="background:#b35e3e;"></span> Терракота <span class="filter-count" id="col-terracotta">(0)</span></label>
         <label class="filter-option"><input type="checkbox" class="filter-color" value="шалфей"> <span class="color-dot" style="background:#7a8e7a;"></span> Шалфей <span class="filter-count" id="col-sage">(0)</span></label>
@@ -1374,21 +1373,21 @@
 
 <!-- ========== СЛАЙДЕР-КОВЁР (СТИЛЬНЫЙ МИНИМАЛИЗМ) ========== -->
 <div class="hero-slider" id="heroSlider">
-    <div class="slide active" style="background-image: url('https://picsum.photos/id/1043/1600/600');">
+    <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1600166898405-da9535204843?q=80&w=2070&auto=format&fit=crop');">
         <div class="carpet-card">
             <h2>Ковры для уюта</h2>
             <p>Натуральные материалы, доступные цены</p>
             <a href="#catalog" class="carpet-btn">В каталог</a>
         </div>
     </div>
-    <div class="slide" style="background-image: url('https://picsum.photos/id/106/1600/600');">
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1581852017101-24f1c0b30fa1?q=80&w=1974&auto=format&fit=crop');">
         <div class="carpet-card">
             <h2>Скидка 30%</h2>
-            <p>На зимнюю коллекцию</p>
+            <p>На новые поступления</p>
             <a href="#catalog" class="carpet-btn" id="discountSliderLink">Смотреть</a>
         </div>
     </div>
-    <div class="slide" style="background-image: url('https://picsum.photos/id/107/1600/600');">
+    <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1615873966541-473b0f6378a7?q=80&w=1974&auto=format&fit=crop');">
         <div class="carpet-card">
             <h2>Доставка по всей России</h2>
             <p>Бесплатно от 15 000 ₽</p>
@@ -1564,7 +1563,7 @@
 <!-- ========== МОДАЛЬНЫЕ ОКНА ========== -->
 <div id="cartModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeCart">&times;</span><h2>Корзина</h2><div id="cartItemsList" style="margin:1.5rem 0;"></div><div style="display:flex; justify-content:space-between; font-size:1.2rem; margin:1.5rem 0;"><span>Итого:</span><span id="cartTotalPrice">0 ₽</span></div><div style="display:flex; gap:1rem;"><button class="btn-primary" id="checkoutBtn">Оформить</button><button class="btn-secondary" id="clearCart">Очистить</button></div></div></div>
 <div id="favoritesModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeFavorites">&times;</span><h2>Избранное</h2><div id="favoritesList" style="margin:1.5rem 0;"></div></div></div>
-<div id="compareModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeCompare">&times;</span><h2>Сравнение</h2><div id="compareList" style="margin:1.5rem 0;"></div></div></div>
+<div id="compareModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeCompare">&times;</span><h2>Сравнение товаров</h2><div id="compareTable" style="margin:1.5rem 0;"></div></div></div>
 <div id="quickviewModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeQuickview">&times;</span><div id="quickviewContent"></div></div></div>
 <div id="productModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeProduct">&times;</span><div id="productDetailContent"></div></div></div>
 <div id="blogModal" class="modal"><div class="modal-content"><span class="modal-close" id="closeBlog">&times;</span><div id="blogArticleContent"></div></div></div>
@@ -1575,14 +1574,13 @@
 <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
 <div id="notification" class="notification"></div>
 
-<!-- ========== СКРИПТЫ (ПОЛНАЯ ЛОГИКА) ========== -->
+<!-- ========== СКРИПТЫ ========== -->
 <script>
     // ======================================================================
-    // ГЕНЕРАЦИЯ ТОВАРОВ (120+) С РАБОЧИМИ ФОТОГРАФИЯМИ (PICSUM)
+    // ГЕНЕРАЦИЯ ТОВАРОВ (120+) С КРАСИВЫМИ ФОТО КОВРОВ
     // ======================================================================
     const categories = ['living','bedroom','children','hallway'];
     const materials = ['Шерсть','Хлопок','Шёлк','Смесовый'];
-    const seasons = ['Зимний','Летний','Всесезонный'];
     const colors = ['терракота','шалфей','глина','графит','песок'];
     const stockStatuses = ['В наличии','Мало','Под заказ'];
     const names = [
@@ -1591,25 +1589,24 @@
         'Бамбук','Модерн','Эко','Флора','Лофт','Волна','Мята','Зигзаг','Песок','Графит'
     ];
     
-    // РАБОЧИЕ ФОТОГРАФИИ (PICSUM)
+    // КРАСИВЫЕ ФОТОГРАФИИ КОВРОВ (без животных)
     const carpetImages = [
-        'https://picsum.photos/id/1043/400/300',
-        'https://picsum.photos/id/106/400/300',
-        'https://picsum.photos/id/107/400/300',
-        'https://picsum.photos/id/108/400/300',
-        'https://picsum.photos/id/169/400/300',
-        'https://picsum.photos/id/155/400/300',
-        'https://picsum.photos/id/227/400/300',
-        'https://picsum.photos/id/250/400/300',
-        'https://picsum.photos/id/280/400/300',
-        'https://picsum.photos/id/290/400/300'
+        'https://images.unsplash.com/photo-1600166898405-da9535204843?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1581852017101-24f1c0b30fa1?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1615873966541-473b0f6378a7?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1598300042247-d1240ee2e25b?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1617073446017-93a8e5e5e2c1?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1600166898405-da9535204843?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1581852017101-24f1c0b30fa1?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1615873966541-473b0f6378a7?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1598300042247-d1240ee2e25b?q=80&w=1974&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1617073446017-93a8e5e5e2c1?q=80&w=1974&auto=format&fit=crop'
     ];
 
     const products = [];
     for (let i = 1; i <= 120; i++) {
         const cat = categories[Math.floor(Math.random() * categories.length)];
         const mat = materials[Math.floor(Math.random() * materials.length)];
-        const sea = seasons[Math.floor(Math.random() * seasons.length)];
         const col = colors[Math.floor(Math.random() * colors.length)];
         const stock = stockStatuses[Math.floor(Math.random() * stockStatuses.length)];
         const price = Math.floor(Math.random() * 15000) + 2000;
@@ -1621,32 +1618,25 @@
             name: name,
             category: cat,
             material: mat,
-            season: sea,
             color: col,
             price: price,
             oldPrice: oldPrice,
             stock: stock,
             rating: parseFloat(rating),
             image: carpetImages[i % carpetImages.length],
-            description: `Красивый ковёр "${name}". Материал: ${mat}, сезон: ${sea}, цвет: ${col}. Отлично подойдёт для ${cat === 'living'?'гостиной':cat==='bedroom'?'спальни':cat==='children'?'детской':'прихожей'}.`,
+            description: `Красивый ковёр "${name}". Материал: ${mat}, цвет: ${col}. Отлично подойдёт для ${cat === 'living'?'гостиной':cat==='bedroom'?'спальни':cat==='children'?'детской':'прихожей'}.`,
             sizes: '2x3, 2.5x3.5'
         });
     }
 
     // ======================================================================
-    // ГЕНЕРАЦИЯ СТАТЕЙ БЛОГА С РЕАЛЬНЫМ ТЕКСТОМ (10 штук)
+    // ГЕНЕРАЦИЯ СТАТЕЙ БЛОГА (всего 4, компактно)
     // ======================================================================
     const blogPosts = [
-        { id:1, title:'Как выбрать ковёр в гостиную', date:'2025-02-10', author:'Амир', excerpt:'Размер, материал, цвет — на что обратить внимание при выборе ковра для главной комнаты.', content:'<p>Выбор ковра для гостиной — ответственное занятие, ведь именно эта комната задаёт тон всему интерьеру. Прежде всего определитесь с размером. Ковёр не должен быть слишком маленьким — стандартное правило: передние ножки дивана и кресел должны стоять на ковре. Для просторной гостиной подойдут размеры 2x3 м или 3x4 м.</p><p>Материал: шерсть — тёплая и износостойкая, но требует бережного ухода. Хлопок — лёгкий и гипоаллергенный, идеален для семей с детьми. Шёлк — роскошен, но требователен в уходе.</p><p>Цвет: если мебель светлая, можно выбрать насыщенный терракотовый или графитовый ковёр. Для тёмной мебели подойдут пастельные оттенки песка или шалфея.</p><p>И не забывайте про стиль: геометрические узоры подойдут для минимализма, восточные орнаменты — для классики.</p>', image:'https://picsum.photos/id/1043/400/300' },
-        { id:2, title:'Советы по уходу за ковром', date:'2025-02-05', author:'Халил', excerpt:'Как правильно чистить и хранить ковёр, чтобы он служил долгие годы.', content:'<p>Регулярная чистка пылесосом (не реже двух раз в неделю) продлит жизнь ворсу. Для шерстяных ковров используйте насадку с мягкой щетиной. Пятна удаляйте сразу: промокните (не трите!) влажной салфеткой с мягким мыльным раствором.</p><p>Раз в полгода проводите глубокую чистку — лучше вызвать профессионалов или использовать специальные шампуни. Не сушите ковёр на солнце, это может выжечь цвет. Храните ковёр в сухом месте, свернув в рулон (не складывайте).</p>', image:'https://picsum.photos/id/106/400/300' },
-        { id:3, title:'Тренды в дизайне ковров 2025', date:'2025-01-28', author:'Амир', excerpt:'Какие цвета, узоры и фактуры будут в моде в этом году.', content:'<p>Дизайнеры единодушны: в 2025 году в тренде природные оттенки — терракота, шалфей, песок, глина. Популярны фактурные ковры с имитацией натуральных материалов (камень, дерево). Геометрические узоры уступают место абстракции и мягким волнам.</p><p>Также в моде ковры с высоким ворсом (shaggy) — они создают уют. Но помните: за ними сложнее ухаживать. Ещё один тренд — экологичность: выбирайте ковры из переработанных материалов или натурального хлопка.</p>', image:'https://picsum.photos/id/107/400/300' },
-        { id:4, title:'Ковры из натуральной шерсти: плюсы и минусы', date:'2025-01-15', author:'Халил', excerpt:'Разбираем все преимущества и недостатки шерстяных ковров.', content:'<p>Шерстяные ковры — классика. Плюсы: они тёплые, упругие, отлично держат форму, не накапливают статическое электричество, гипоаллергенны (если у вас нет аллергии на ланолин). Минусы: высокая цена, чувствительность к влаге, могут привлекать моль.</p><p>Уход за шерстью требует аккуратности: используйте только сухую чистку или специальные средства. Зато такой ковёр прослужит десятилетия.</p>', image:'https://picsum.photos/id/108/400/300' },
-        { id:5, title:'Как подобрать ковёр под цвет мебели', date:'2025-01-03', author:'Амир', excerpt:'Советы по сочетанию цветов в интерьере.', content:'<p>Универсальное правило: ковёр может быть либо на тон темнее, либо на тон светлее основной мебели, либо контрастным акцентом. Если мебель пёстрая, выбирайте однотонный ковёр, и наоборот.</p><p>Для светлой мебели (бежевой, белой) подойдут тёплые терракотовые, горчичные или глубокие синие тона. Для тёмной мебели — пастельные, светлые ковры, чтобы комната не казалась мрачной.</p>', image:'https://picsum.photos/id/169/400/300' },
-        { id:6, title:'Ковёр в детскую: безопасность и дизайн', date:'2024-12-20', author:'Халил', excerpt:'Как выбрать ковёр для ребёнка: гипоаллергенные материалы и яркие принты.', content:'<p>В детской ковёр должен быть безопасным: без резкого запаха, из натуральных материалов (хлопок, шерсть с пометкой «гипоаллергенно»). Важно, чтобы он легко чистился, ведь дети часто роняют еду и краски.</p><p>Дизайн: яркие цвета, забавные принты (зверушки, машинки, звёзды) стимулируют развитие. Размер лучше выбрать побольше, чтобы покрывать всю игровую зону.</p>', image:'https://picsum.photos/id/155/400/300' },
-        { id:7, title:'Укладка ковра на тёплый пол', date:'2024-12-10', author:'Амир', excerpt:'Можно ли стелить ковёр на тёплый пол и как не ошибиться.', content:'<p>Да, можно, но с оговорками. Для электрического тёплого пола подходят только ковры с пометкой «для тёплого пола» — обычно это тонкие модели с низким ворсом. Водяной пол менее требователен, но всё равно избегайте слишком толстых ковров — они ухудшают теплопередачу.</p><p>Лучший выбор — хлопковые или синтетические ковры с термостойкой основой. Шерсть тоже подходит, но убедитесь, что производитель разрешает.</p>', image:'https://picsum.photos/id/227/400/300' },
-        { id:8, title:'Ковры ручной работы vs машинной', date:'2024-11-28', author:'Халил', excerpt:'Что выбрать: уникальность ручного труда или доступность машинного производства.', content:'<p>Ручная работа — это эксклюзивность, высокая прочность, натуральные материалы. Но цена в разы выше. Машинное производство даёт огромный выбор дизайнов по демократичным ценам, но такие ковры менее долговечны.</p><p>Если вы ищете ковёр на десятилетия и готовы инвестировать — выбирайте ручной. Для частой смены интерьера или бюджетного варианта подойдёт машинный.</p>', image:'https://picsum.photos/id/250/400/300' },
-        { id:9, title:'Как рассчитать размер ковра', date:'2024-11-15', author:'Амир', excerpt:'Простые формулы и советы, чтобы не ошибиться с размером.', content:'<p>Для гостиной: ковёр должен быть шире дивана минимум на 20-30 см с каждой стороны. Под обеденный стол: выбирайте такой, чтобы стулья не съезжали с него, когда отодвигаются (обычно плюс 60-80 см от края стола).</p><p>В спальне: ковёр может находиться только в зоне кровати — достаточно, чтобы на него становились ногами, вставая. Или покрывать всю комнату, оставляя отступ от стен 20-30 см.</p>', image:'https://picsum.photos/id/280/400/300' },
-        { id:10, title:'Модные цвета ковров в этом сезоне', date:'2024-11-01', author:'Халил', excerpt:'Терракота, шалфей, графит и другие актуальные оттенки.', content:'<p>В этом сезоне дизайнеры советуют обратить внимание на природную палитру. Терракота — цвет глины, создаёт тёплую атмосферу. Шалфей — нежный зелёный, успокаивает и освежает. Графит — глубокий серый, добавляет элегантности. Песок — универсальная база. Глина — более тёплый вариант терракоты.</p><p>Не бойтесь экспериментировать с яркими акцентами, если основная гамма нейтральна.</p>', image:'https://picsum.photos/id/290/400/300' }
+        { id:1, title:'Как выбрать ковёр в гостиную', date:'2025-02-10', author:'Амир', excerpt:'Размер, материал, цвет — на что обратить внимание при выборе ковра для главной комнаты.', content:'<p>Выбор ковра для гостиной — ответственное занятие, ведь именно эта комната задаёт тон всему интерьеру. Прежде всего определитесь с размером. Ковёр не должен быть слишком маленьким — стандартное правило: передние ножки дивана и кресел должны стоять на ковре. Для просторной гостиной подойдут размеры 2x3 м или 3x4 м.</p><p>Материал: шерсть — тёплая и износостойкая, но требует бережного ухода. Хлопок — лёгкий и гипоаллергенный, идеален для семей с детьми. Шёлк — роскошен, но требователен в уходе.</p><p>Цвет: если мебель светлая, можно выбрать насыщенный терракотовый или графитовый ковёр. Для тёмной мебели подойдут пастельные оттенки песка или шалфея.</p>', image:'https://images.unsplash.com/photo-1598300042247-d1240ee2e25b?q=80&w=1974&auto=format&fit=crop' },
+        { id:2, title:'Советы по уходу за ковром', date:'2025-02-05', author:'Халил', excerpt:'Как правильно чистить и хранить ковёр, чтобы он служил долгие годы.', content:'<p>Регулярная чистка пылесосом (не реже двух раз в неделю) продлит жизнь ворсу. Для шерстяных ковров используйте насадку с мягкой щетиной. Пятна удаляйте сразу: промокните (не трите!) влажной салфеткой с мягким мыльным раствором.</p><p>Раз в полгода проводите глубокую чистку — лучше вызвать профессионалов или использовать специальные шампуни. Не сушите ковёр на солнце, это может выжечь цвет. Храните ковёр в сухом месте, свернув в рулон (не складывайте).</p>', image:'https://images.unsplash.com/photo-1600166898405-da9535204843?q=80&w=2070&auto=format&fit=crop' },
+        { id:3, title:'Тренды в дизайне ковров 2025', date:'2025-01-28', author:'Амир', excerpt:'Какие цвета, узоры и фактуры будут в моде в этом году.', content:'<p>Дизайнеры единодушны: в 2025 году в тренде природные оттенки — терракота, шалфей, песок, глина. Популярны фактурные ковры с имитацией натуральных материалов (камень, дерево). Геометрические узоры уступают место абстракции и мягким волнам.</p><p>Также в моде ковры с высоким ворсом (shaggy) — они создают уют. Но помните: за ними сложнее ухаживать. Ещё один тренд — экологичность: выбирайте ковры из переработанных материалов или натурального хлопка.</p>', image:'https://images.unsplash.com/photo-1615873966541-473b0f6378a7?q=80&w=1974&auto=format&fit=crop' },
+        { id:4, title:'Ковры из натуральной шерсти: плюсы и минусы', date:'2025-01-15', author:'Халил', excerpt:'Разбираем все преимущества и недостатки шерстяных ковров.', content:'<p>Шерстяные ковры — классика. Плюсы: они тёплые, упругие, отлично держат форму, не накапливают статическое электричество, гипоаллергенны (если у вас нет аллергии на ланолин). Минусы: высокая цена, чувствительность к влаге, могут привлекать моль.</p><p>Уход за шерстью требует аккуратности: используйте только сухую чистку или специальные средства. Зато такой ковёр прослужит десятилетия.</p>', image:'https://images.unsplash.com/photo-1581852017101-24f1c0b30fa1?q=80&w=1974&auto=format&fit=crop' }
     ];
 
     // ======================================================================
@@ -1656,7 +1646,6 @@
     let searchQuery = '';
     let sortBy = 'default';
     let selectedMaterials = [];
-    let selectedSeasons = [];
     let selectedColors = [];
     let selectedStock = [];
     let minPrice = 0;
@@ -1697,9 +1686,6 @@
         document.getElementById('mat-cotton').innerHTML = `(${products.filter(p => p.material === 'Хлопок').length})`;
         document.getElementById('mat-silk').innerHTML = `(${products.filter(p => p.material === 'Шёлк').length})`;
         document.getElementById('mat-mix').innerHTML = `(${products.filter(p => p.material === 'Смесовый').length})`;
-        document.getElementById('sea-winter').innerHTML = `(${products.filter(p => p.season === 'Зимний').length})`;
-        document.getElementById('sea-summer').innerHTML = `(${products.filter(p => p.season === 'Летний').length})`;
-        document.getElementById('sea-all').innerHTML = `(${products.filter(p => p.season === 'Всесезонный').length})`;
         document.getElementById('col-terracotta').innerHTML = `(${products.filter(p => p.color === 'терракота').length})`;
         document.getElementById('col-sage').innerHTML = `(${products.filter(p => p.color === 'шалфей').length})`;
         document.getElementById('col-clay').innerHTML = `(${products.filter(p => p.color === 'глина').length})`;
@@ -1715,7 +1701,6 @@
             if (currentCategory !== 'all' && p.category !== currentCategory) return false;
             if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
             if (selectedMaterials.length && !selectedMaterials.includes(p.material)) return false;
-            if (selectedSeasons.length && !selectedSeasons.includes(p.season)) return false;
             if (selectedColors.length && !selectedColors.includes(p.color)) return false;
             if (selectedStock.length) {
                 if (selectedStock.includes('in') && p.stock !== 'В наличии') return false;
@@ -1763,7 +1748,7 @@
             return `
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x300?text=AVVA';">
+                        <img src="${p.image}" alt="${p.name}" loading="lazy">
                         ${badge}
                         <div class="product-icons">
                             <span class="product-icon favorite ${isFavorite}" data-id="${p.id}" data-type="favorite"><i class="fas fa-heart"></i></span>
@@ -1775,7 +1760,6 @@
                         <div class="product-category">${catName}</div>
                         <div class="product-title" data-id="${p.id}">${p.name}</div>
                         <div class="product-material">Материал: ${p.material}</div>
-                        <div class="product-season">Сезон: ${p.season}</div>
                         <div class="product-rating">${'★'.repeat(Math.floor(p.rating))}${p.rating%1?'½':''} (${p.rating})</div>
                         <div class="product-price">
                             ${p.price.toLocaleString()} ₽
@@ -1900,7 +1884,65 @@
         }
     }
 
-    // ========== СРАВНЕНИЕ ==========
+    // ========== СРАВНЕНИЕ (ПОЛНОСТЬЮ РАБОЧЕЕ) ==========
+    function updateCompareDisplay() {
+        document.getElementById('compareCount').textContent = compare.length;
+        renderCompareTable();
+    }
+
+    function renderCompareTable() {
+        const container = document.getElementById('compareTable');
+        if (!container) return;
+        
+        if (compare.length === 0) {
+            container.innerHTML = '<p>Список сравнения пуст. Добавьте товары для сравнения.</p>';
+            return;
+        }
+
+        const compareProducts = compare.map(id => products.find(p => p.id === id)).filter(p => p);
+        
+        let html = '<table style="width:100%; border-collapse:collapse;">';
+        html += '<tr><th style="text-align:left; padding:8px; border:1px solid var(--sand);">Характеристика</th>';
+        compareProducts.forEach(p => {
+            html += `<th style="text-align:center; padding:8px; border:1px solid var(--sand);">${p.name}</th>`;
+        });
+        html += '</tr>';
+
+        const rows = [
+            { label: 'Изображение', field: 'image' },
+            { label: 'Цена', field: 'price' },
+            { label: 'Категория', field: 'category' },
+            { label: 'Материал', field: 'material' },
+            { label: 'Цвет', field: 'color' },
+            { label: 'Наличие', field: 'stock' },
+            { label: 'Рейтинг', field: 'rating' },
+            { label: 'Размеры', field: 'sizes' }
+        ];
+
+        rows.forEach(row => {
+            html += '<tr>';
+            html += `<td style="padding:8px; border:1px solid var(--sand); font-weight:600;">${row.label}</td>`;
+            compareProducts.forEach(p => {
+                let value = p[row.field];
+                if (row.field === 'image') {
+                    value = `<img src="${p.image}" style="width:80px; height:60px; object-fit:cover; border-radius:8px;">`;
+                } else if (row.field === 'price') {
+                    value = p.price.toLocaleString() + ' ₽';
+                } else if (row.field === 'rating') {
+                    value = p.rating + ' ★';
+                } else if (row.field === 'category') {
+                    const catName = { living:'Гостиная', bedroom:'Спальня', children:'Детская', hallway:'Прихожая' }[p.category];
+                    value = catName;
+                }
+                html += `<td style="padding:8px; border:1px solid var(--sand); text-align:center;">${value}</td>`;
+            });
+            html += '</tr>';
+        });
+
+        html += '</table>';
+        container.innerHTML = html;
+    }
+
     function toggleCompare(id) {
         if (compare.includes(id)) {
             compare = compare.filter(c => c !== id);
@@ -1911,26 +1953,8 @@
         saveCompare();
         updateCompareDisplay();
         updateBadges();
-    }
-
-    function updateCompareDisplay() {
-        document.getElementById('compareCount').textContent = compare.length;
-        const list = document.getElementById('compareList');
-        if (!list) return;
-        list.innerHTML = '';
-        if (compare.length===0) list.innerHTML = '<p>Список пуст</p>';
-        else {
-            compare.forEach(id => {
-                const p = products.find(pr => pr.id === id);
-                if (p) {
-                    list.innerHTML += `
-                        <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
-                            <span>${p.name} — ${p.price.toLocaleString()} ₽</span>
-                            <button class="compare-remove" data-id="${p.id}" style="background:none; border:none; color:red;"><i class="fas fa-trash"></i></button>
-                        </div>
-                    `;
-                }
-            });
+        if (document.getElementById('compareModal').classList.contains('active')) {
+            renderCompareTable();
         }
     }
 
@@ -2048,7 +2072,6 @@
                         <div>
                             <p><strong>Цена:</strong> ${p.price.toLocaleString()} ₽</p>
                             <p><strong>Материал:</strong> ${p.material}</p>
-                            <p><strong>Сезон:</strong> ${p.season}</p>
                             <p><strong>Цвет:</strong> ${p.color}</p>
                             <p><strong>Наличие:</strong> ${p.stock}</p>
                             <p><strong>Размеры:</strong> ${p.sizes}</p>
@@ -2100,7 +2123,6 @@
     // Применение фильтров
     document.getElementById('applyFilters').addEventListener('click', () => {
         selectedMaterials = Array.from(document.querySelectorAll('.filter-material:checked')).map(cb => cb.value);
-        selectedSeasons = Array.from(document.querySelectorAll('.filter-season:checked')).map(cb => cb.value);
         selectedColors = Array.from(document.querySelectorAll('.filter-color:checked')).map(cb => cb.value);
         selectedStock = Array.from(document.querySelectorAll('.filter-stock:checked')).map(cb => cb.value);
         minPrice = parseInt(document.getElementById('minPrice').value) || 0;
@@ -2113,12 +2135,12 @@
     });
 
     document.getElementById('resetFilters').addEventListener('click', () => {
-        document.querySelectorAll('.filter-material, .filter-season, .filter-color, .filter-stock').forEach(cb => cb.checked = false);
+        document.querySelectorAll('.filter-material, .filter-color, .filter-stock').forEach(cb => cb.checked = false);
         document.getElementById('minPrice').value = 0;
         document.getElementById('maxPrice').value = 100000;
         document.getElementById('priceSliderMin').value = 0;
         document.getElementById('priceSliderMax').value = 100000;
-        selectedMaterials = []; selectedSeasons = []; selectedColors = []; selectedStock = [];
+        selectedMaterials = []; selectedColors = []; selectedStock = [];
         minPrice = 0; maxPrice = 100000;
         currentPage = 1;
         render();
@@ -2168,7 +2190,7 @@
         document.getElementById('favoritesModal').classList.add('active');
     });
     document.getElementById('compareIcon').addEventListener('click', () => {
-        updateCompareDisplay();
+        renderCompareTable();
         document.getElementById('compareModal').classList.add('active');
     });
     document.getElementById('userIcon').addEventListener('click', (e) => {
